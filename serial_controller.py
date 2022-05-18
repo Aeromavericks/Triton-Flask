@@ -18,7 +18,7 @@ class Controller():
 
         for x in ports:
             if 'Maple' in x.description:
-                maple.ports.append(x)
+                maple_ports.append(x)
 
         port = ''
 
