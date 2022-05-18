@@ -8,6 +8,8 @@ class Controller():
         
         else:
             self.typeof_mc = 'V'
+        
+        self.ser = None
 
     def connect(self):
         ports = list(serial.tools.list_ports.comports())
@@ -16,7 +18,7 @@ class Controller():
 
         for x in ports:
             if 'Maple' in x.description:
-                maple.ports.append(x)
+                maple_ports.append(x)
 
         port = ''
 
@@ -29,3 +31,9 @@ class Controller():
 
         
         self.ser = serial.Serial(port)
+
+    def get_p(self):
+
+        pressures = self.ser.readline().decode().strip().split(',')
+
+        return pressures
