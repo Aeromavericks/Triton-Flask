@@ -63,7 +63,8 @@
     <div class="container">
         <div class="item header">header</div>
         <div class="item sidebar">sidebar</div>
-        <div class="item content-1">P&ID?</div>
+        <div class="item content-1">    {% include "loadavg.html" %}
+            {% block content %}{% endblock %}</div>
         <div class="item content-2">Pressure Plots</div>
         <div class="item content-3">Valve Control</div>
         <div class="item footer">footer</div>
