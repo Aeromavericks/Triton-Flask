@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\static",
+    "\\templates"
   ],
-  "SelectedNode": "\\C:\\Users\\Tyler\\Source\\Repos\\Triton-Flask",
+  "SelectedNode": "\\static\\styles.css",
   "PreviewInSolutionExplorer": false
 }
