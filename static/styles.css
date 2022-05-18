@@ -16,7 +16,6 @@
     font-size: 20px;
 }
 
-
 .main-menu:hover, nav.main-menu.expanded {
     width: 250px;
     overflow: visible;
@@ -98,7 +97,6 @@ nav {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    -o-user-select: none;
     user-select: none;
 }
 
