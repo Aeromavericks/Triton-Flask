@@ -24,7 +24,7 @@ class Controller():
 
         for x in maple_ports:
             tmp = serial.Serial(x.device)
-            mode = tmp.readline().decode().rstrip().split(',')[0]
+            mode = tmp.readline().decode().split(',')[0]
             if mode == self.typeof_mc:
                 port = x.device 
             tmp.close()
@@ -34,6 +34,6 @@ class Controller():
 
     def get_p(self):
 
-        pressures = self.ser.readline().decode().split(',')
+        pressures = self.ser.readline().decode().strip().split(',')
 
         return pressures
