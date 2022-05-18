@@ -24,7 +24,7 @@ class Controller():
 
         for x in maple_ports:
             tmp = serial.Serial(x.device)
-            mode = tmp.readline().decode().strip().split(',')[0]
+            mode = tmp.readline().decode().rstrip().split(',')[0]
             if mode == self.typeof_mc:
                 port = x.device 
             tmp.close()
