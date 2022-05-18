@@ -1,0 +1,1 @@
+Here to maintain folder structure with Git
