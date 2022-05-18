@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../static/styles.css">
     <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
-
+    {{ turbo() }}
 </head>
 
 <body>
@@ -69,7 +69,8 @@
         <div class="item footer">footer</div>
     </div>
 
-
+    {% include "loadavg.html" %}
+    {% block content %}{% endblock %}
 </body>
 </html>
 
