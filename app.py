@@ -6,6 +6,7 @@ pressure_controller = serial_controller.Controller('pressure')
 
 @app.route('/')
 def index():
+    print(pressure_controller.get_p())
     return render_template('index.html', value = '100')
 
 

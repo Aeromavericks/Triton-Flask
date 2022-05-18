@@ -29,3 +29,9 @@ class Controller():
 
         
         self.ser = serial.Serial(port)
+
+    def get_p(self):
+
+        pressures = self.ser.readline().decode().split(',')
+
+        return pressures
