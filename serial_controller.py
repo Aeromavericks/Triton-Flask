@@ -8,6 +8,8 @@ class Controller():
         
         else:
             self.typeof_mc = 'V'
+        
+        self.ser = None
 
     def connect(self):
         ports = list(serial.tools.list_ports.comports())
