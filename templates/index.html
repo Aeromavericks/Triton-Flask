@@ -1,18 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 
-<div class="container">
-  <div class="item header">header{{value}}</div>
-  <div class="item sidebar">sidebar</div>
-  <div class="item content-1">P&ID?</div>
-  <div class="item content-2">Pressure Plots</div>
-  <div class="item content-3">Valve Control</div>
-  <div class="item footer">footer</div>
-</div>
+</head>
+
+<body>
+    <div class="area"></div><nav class="main-menu">
+        <ul>
+            <li>
+                <a href="http:">
+                    <i class="fa fa-home fa-2x"></i>
+                    <span class="nav-text">
+                        Dashboard
+                    </span>
+                </a>
+
+            </li>
+
+            <li class="has-subnav">
+                <a href="#">
+                    <i class="fa fa-list fa-2x"></i>
+                    <span class="nav-text">
+                        Forms
+                    </span>
+                </a>
+
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-bar-chart-o fa-2x"></i>
+                    <span class="nav-text">
+                        Graphs and Statistics
+                    </span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-table fa-2x"></i>
+                    <span class="nav-text">
+                        Tables
+                    </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-info fa-2x"></i>
+                    <span class="nav-text">
+                        Documentation
+                    </span>
+                </a>
+            </li>
+        </ul>
+
+
+    </nav>
+    <div class="container">
+        <div class="item header">header</div>
+        <div class="item sidebar">sidebar</div>
+        <div class="item content-1">P&ID?</div>
+        <div class="item content-2">Pressure Plots</div>
+        <div class="item content-3">Valve Control</div>
+        <div class="item footer">footer</div>
+    </div>
+
 
 </body>
 </html>
+
+
