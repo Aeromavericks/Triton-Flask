@@ -12,7 +12,7 @@ press = '100'
 
 @app.route('/')
 def index():
-    return render_template('index.html', value = press)
+    return render_template('index.html', press = press)
 
 @app.route('/valve_toggle/<valvename>')
 def valve_toggle(valvename):
