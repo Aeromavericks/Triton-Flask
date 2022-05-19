@@ -4,7 +4,7 @@
           $('#valve1').change(function(e) {
             //Prevents page refresh
             e.preventDefault()
-            console($.text())
+            console($(this).text())
 
             if ($(this).is(':checked')) {
               console.log('Calling function to turn on valve1')
