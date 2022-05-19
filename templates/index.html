@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+        $(function() {
+          $('#toggle').change(function(e) {
+            //Prevents page refresh
+            //e.preventDefault()
+            name = $(this).attr("name")
 
+            if ($(this).is(':checked')) {
+              console.log('Calling function to turn on '+name)
+            }
+            else{
+              console.log('Calling function to turn off '+name)
+            }
+            
+            $.getJSON('/valve_toggle/'+name,
+                function(data) {
+              console.log(data);
+              console.log('Test');
+            });
+            return false;
+          });
+        });
+</script>
 
 <html>
 <head>
