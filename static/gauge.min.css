@@ -76,7 +76,8 @@
         border-radius:50%}
 
     .gauge .needle{
-        transform:rotate(calc(270deg * calc(var(load1,0deg)/ 100) - 45deg));
+        --press: {{press}}
+        transform:rotate(calc(270deg * calc(var(--press,0deg)/ 100) - 45deg));
         background:#000;
         position:relative;
         left:0;
