@@ -32,6 +32,7 @@ class Controller():
             tmp = serial.Serial(x.device)
             tmp.reset_input_buffer()
             mode = tmp.readline().decode().split(',')[0]
+            print(mode)
             if mode == self.typeof_mc:
                 port = x.device 
             tmp.close()
