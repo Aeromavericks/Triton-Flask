@@ -1,4 +1,29 @@
 <!DOCTYPE html>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+        $(function() {
+          $('#toggle').change(function(e) {
+            //Prevents page refresh
+            //e.preventDefault()
+            name = $(this).attr("name")
+
+            if ($(this).is(':checked')) {
+              console.log('Calling function to turn on '+name)
+            }
+            else{
+              console.log('Calling function to turn off '+name)
+            }
+            
+            $.getJSON('/valve_toggle/'+name,
+                function(data) {
+              console.log(data);
+              console.log('Test');
+            });
+            return false;
+          });
+        });
+</script>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../static/styles.css">
@@ -7,68 +32,22 @@
     <link rel="stylesheet" href="../static/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../static/gauge.min.css" />
     <link rel="stylesheet" href="{{url_for('static', filename='gauge.min.css')}}">
+    {{ turbo() }}
+<title>AeroMavs TestFire</title>
 </head>
 
 <body>
-    <div class="area"></div><nav class="main-menu">
-        <ul>
-            <li>
-                <a href="http:">
-                    <i class="fa fa-home fa-2x"></i>
-                    <span class="nav-text">
-                        Dashboard
-                    </span>
-                </a>
 
-            </li>
-
-            <li class="has-subnav">
-                <a href="#">
-                    <i class="fa fa-list fa-2x"></i>
-                    <span class="nav-text">
-                        Forms
-                    </span>
-                </a>
-
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-bar-chart-o fa-2x"></i>
-                    <span class="nav-text">
-                        Graphs and Statistics
-                    </span>
-                </a>
-            </li>
-
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-table fa-2x"></i>
-                    <span class="nav-text">
-                        Tables
-                    </span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-info fa-2x"></i>
-                    <span class="nav-text">
-                        Documentation
-                    </span>
-                </a>
-            </li>
-        </ul>
-
-
-    </nav>
     <div class="container">
-        <div class="item header">header</div>
+        <div class="item header">Navigation</div>
         <div class="item sidebar">sidebar</div>
-        <div class="item content-1">    {% include "loadavg.html" %}
-            {% block content %}{% endblock %}</div>
+        <div class="item content-1">
+          
+        </div>
         <div class="item content-2">
+            
+            {% include "loadavg.html" %}
+            {% block content %}{% endblock %}
             <div class="gauge">
                 <style>
                     .gauge .needle{
@@ -106,11 +85,35 @@
             </div>
             </div>
         </div>
-        <div class="item content-3">Valve Control</div>
+        </div>
+        <form>
+        <div class="item content-3">
+
+            <div class="toggle">
+                <input type="checkbox" value="None" id="toggle" name="valve1" />
+                <label for="toggle">Valve 1</label>
+            </div>
+
+            <div class="toggle">
+                <input type="checkbox" value="None" id="toggle" name="valve2" />
+                <label for="toggle">Valve 2</label>
+            </div>
+
+            <div class="toggle">
+                <input type="checkbox" value="None" id="toggle" name="valve3" />
+                <label for="toggle">Valve 3</label>
+            </div>
+
+            <div class="toggle">
+                <input type="checkbox" value="None" id="toggle" name="valve4" />
+                <label for="toggle">Valve 4</label>
+            </div>
+
+        </div>
+    </form>
+
         <div class="item footer">footer</div>
     </div>
 
 </body>
 </html>
-
-
