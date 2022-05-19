@@ -5,7 +5,8 @@
             e.preventDefault()
             $.getJSON('/background_process_test',
                 function(data) {
-              console.log(data)
+              console.log(data);
+              console.log('Test');
             });
             return false;
           });
