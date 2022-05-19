@@ -6,6 +6,7 @@ import threading, time, sys
 app = Flask(__name__)
 turbo = Turbo(app)
 pressure_controller = serial_controller.Controller('pressure')
+valve_controller = serial_controller.Controller('valve')
 
 @app.route('/')
 def index():
@@ -13,8 +14,9 @@ def index():
 
 @app.route('/valve_toggle/<valvename>')
 def valve_toggle(valvename):
-    print(valvename)
-    return {'k':'v'}
+    #call change valve here
+    pressure_controller.change_valve(valvename)
+    return {valvename:'changed'}
 
 
 @app.route('/test')
@@ -39,6 +41,7 @@ def inject_load():
 
 if __name__ == '__main__':
     pressure_controller.connect()
+    valve_controller.connect()
     
     app.run(host='0.0.0.0', debug=True)
     

@@ -34,7 +34,6 @@ class Controller():
             if mode == self.typeof_mc:
                 port = x.device 
             tmp.close()
-
         
         self.ser = serial.Serial(port)
 
@@ -47,4 +46,16 @@ class Controller():
         return pressures
     
     def change_valve(self, valve):
-        return 'n'
+        
+        if valve == 'valve1':
+            ser.write('A'.encode())
+        elif valve == 'valve2':
+            ser.write('B'.encode())
+        elif valve == 'valve3':  
+            ser.write('C'.encode())
+        elif valve == 'valve4':
+            ser.write('D'.encode())
+        elif valve == 'valve5':
+            ser.write('E'.encode())
+        elif valve == 'valve6':
+            ser.write('F'.encode())
