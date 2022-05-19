@@ -4,7 +4,7 @@
           $('#valve').change(function(e) {
             //Prevents page refresh
             e.preventDefault()
-            console.log($(this).attr("name"))
+            name = $(this).attr("name")
 
             if ($(this).is(':checked')) {
               console.log('Calling function to turn on valve1')
@@ -13,7 +13,7 @@
               console.log('Calling function to turn off valve1')
             }
             
-            $.getJSON('/background_process_test',
+            $.getJSON('/background_process_test/'+name,
                 function(data) {
               console.log(data);
               console.log('Test');
