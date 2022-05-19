@@ -15,6 +15,11 @@ def index():
 def background_process_test():
     print ("Hello")
     return ("nothing")
+
+
+@app.route('/test')
+def test():
+    return render_template('test.html')
     
 @app.before_first_request
 def before_first_request():
