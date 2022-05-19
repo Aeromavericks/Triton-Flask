@@ -13,7 +13,7 @@ def index():
 
 @app.route('/background_process_test')
 def background_process_test():
-    return ("nothing")
+    return {'k':'v'}
 
 
 @app.route('/test')
