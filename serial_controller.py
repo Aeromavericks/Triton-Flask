@@ -8,6 +8,12 @@ class Controller():
         
         else:
             self.typeof_mc = 'V'
+            self.valve1state = false
+            self.valve2state = false
+            self.valve3state = false
+            self.valve4state = false
+            self.valve5state = false
+            self.valve6state = false
         
         self.ser = None
 
@@ -33,7 +39,12 @@ class Controller():
         self.ser = serial.Serial(port)
 
     def get_p(self):
+        if self.typeof_mc != 'P':
+            return 'Error'
 
         pressures = self.ser.readline().decode().strip().split(',')
 
         return pressures
+    
+    def change_valve(self, valve):
+        
