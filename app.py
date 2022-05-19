@@ -18,10 +18,6 @@ def valve_toggle(valvename):
     valve_controller.change_valve(valvename)
     return {valvename:'changed'}
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
-
 @app.before_first_request
 def before_first_request():
     threading.Thread(target=update_pressure).start()
@@ -30,6 +26,7 @@ def update_pressure():
     with app.app_context():
         while True:
             time.sleep(0.5)
+            print('Update send')
             turbo.push(turbo.replace(render_template('loadavg.html'), 'pressure'))
 
 @app.context_processor
