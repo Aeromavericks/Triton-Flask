@@ -11,8 +11,8 @@ pressure_controller = serial_controller.Controller('pressure')
 def index():
     return render_template('index.html', value = '100')
 
-@app.route('/background_process_test/<valvename>')
-def background_process_test(valvename):
+@app.route('/valve_toggle/<valvename>')
+def valve_toggle(valvename):
     print(valvename)
     return {'k':'v'}
 

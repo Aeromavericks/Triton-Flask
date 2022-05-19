@@ -7,13 +7,13 @@
             name = $(this).attr("name")
 
             if ($(this).is(':checked')) {
-              console.log('Calling function to turn on valve1')
+              console.log('Calling function to turn on '+name)
             }
             else{
-              console.log('Calling function to turn off valve1')
+              console.log('Calling function to turn off '+name)
             }
             
-            $.getJSON('/background_process_test/'+name,
+            $.getJSON('/valve_toggle/'+name,
                 function(data) {
               console.log(data);
               console.log('Test');
