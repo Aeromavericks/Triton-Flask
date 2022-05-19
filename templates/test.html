@@ -1,10 +1,10 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type=text/javascript>
         $(function() {
-          $('#valve1').change(function(e) {
+          $('#valve').change(function(e) {
             //Prevents page refresh
             e.preventDefault()
-            //console.log($(this).attr("name"))
+            console.log($(this).attr("name"))
 
             if ($(this).is(':checked')) {
               console.log('Calling function to turn on valve1')
