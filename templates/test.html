@@ -3,6 +3,12 @@
         $(function() {
           $('#valve1').change(function(e) {
             console.log('Here')
+            if ($(this).is(':checked')) {
+              console.log('Checked')
+            }
+            else{
+              console.log('Unchecked')
+            }
             e.preventDefault()
             $.getJSON('/background_process_test',
                 function(data) {
