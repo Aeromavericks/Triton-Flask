@@ -11,7 +11,11 @@ pressure_controller = serial_controller.Controller('pressure')
 def index():
     return render_template('index.html', value = '100')
 
-
+@app.route('/background_process_test')
+def background_process_test():
+    print ("Hello")
+    return ("nothing")
+    
 @app.before_first_request
 def before_first_request():
     threading.Thread(target=update_pressure).start()
