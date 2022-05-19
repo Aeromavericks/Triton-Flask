@@ -34,6 +34,7 @@ class Controller():
             mode = ''
             while mode != 'V' or mode !='P':
                 mode = tmp.readline().decode().split(',')[0]
+                print(mode)
             if mode == self.typeof_mc:
                 port = x.device 
             tmp.close()
