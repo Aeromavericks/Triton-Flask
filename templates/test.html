@@ -2,6 +2,7 @@
 <script type=text/javascript>
         $(function() {
           $('a#test').on('click', function(e) {
+            console.log('Here')
             e.preventDefault()
             $.getJSON('/background_process_test',
                 function(data) {
