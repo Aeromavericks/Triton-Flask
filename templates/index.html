@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 
     <link rel="stylesheet" href="../static/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/gauge.min.css" />
+    <link rel="stylesheet" href="{{url_for('static', filename='gauge.min.css')}}">
 </head>
 
 <body>
@@ -66,7 +68,44 @@
         <div class="item sidebar">sidebar</div>
         <div class="item content-1">    {% include "loadavg.html" %}
             {% block content %}{% endblock %}</div>
-        <div class="item content-2">Pressure Plots</div>
+        <div class="item content-2">
+            <div class="gauge">
+                <style>
+                    .gauge .needle{
+                        transform:rotate(calc(270deg * calc(var(load1,0deg)/ 100) - 45deg));
+                        background:#000;
+                        position:relative;
+                        left:0;
+                        top:49%;
+                        width:100%;
+                        height:4%;
+                        margin-bottom:-4%;
+                        background:linear-gradient(90deg,rgba(2,0,36,0) 0,rgba(0,0,0,0) 24%,#000 24%,#000 30%,rgba(0,0,0,0) 50%)
+                    }
+                </style>
+            </div>
+            <div class="ticks">
+                <div class="tithe" style="--gauge-tithe-tick:1;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:2;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:3;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:4;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:6;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:7;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:8;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:9;"></div>
+                <div class="min"></div>
+                <div class="mid"></div>
+                <div class="max"></div>
+            </div>
+            <div class="tick-circle"></div>
+            <div class="needle">
+                <div class="needle-head"></div>
+            </div>
+            <div class="labels">
+                <div class="value-label"></div>
+            </div>
+            </div>
+        </div>
         <div class="item content-3">Valve Control</div>
         <div class="item footer">footer</div>
     </div>

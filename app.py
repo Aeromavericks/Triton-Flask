@@ -6,10 +6,10 @@ import threading, time, sys
 app = Flask(__name__)
 turbo = Turbo(app)
 pressure_controller = serial_controller.Controller('pressure')
-
+press = '100'
 @app.route('/')
 def index():
-    return render_template('index.html', value = '100')
+    return render_template('index.html', value = press)
 
 
 @app.before_first_request
