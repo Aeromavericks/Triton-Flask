@@ -19,7 +19,6 @@ def valve_toggle(valvename):
     print('Here called '+valvename)
     return {valvename:'changed'}
 
-
 @app.route('/test')
 def test():
     return render_template('test.html')

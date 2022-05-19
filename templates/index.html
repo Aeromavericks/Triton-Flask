@@ -1,9 +1,35 @@
 <!DOCTYPE html>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+        $(function() {
+          $('#toggle').change(function(e) {
+            //Prevents page refresh
+            e.preventDefault()
+            name = $(this).attr("name")
+
+            if ($(this).is(':checked')) {
+              console.log('Calling function to turn on '+name)
+            }
+            else{
+              console.log('Calling function to turn off '+name)
+            }
+            
+            $.getJSON('/valve_toggle/'+name,
+                function(data) {
+              console.log(data);
+              console.log('Test');
+            });
+            return false;
+          });
+        });
+</script>
+
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../static/styles.css">
     <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
-    <a href="{{ turbo() }}" </a>
+    <a href="{{ turbo() }}"> </a>
 <title>AeroMavs TestFire</title>
 </head>
 
@@ -24,28 +50,24 @@
         <div class="item content-3">
 
             <div class="toggle">
-                <input type="checkbox" value="None" id="toggle" name="check" />
+                <input type="checkbox" value="None" id="toggle" name="valve1" />
                 <label for="toggle">Valve 1</label>
             </div>
 
-
             <div class="toggle">
-                <input type="checkbox" value="None" id="toggle" name="check" />
+                <input type="checkbox" value="None" id="toggle" name="valve2" />
                 <label for="toggle">Valve 2</label>
             </div>
 
-
             <div class="toggle">
-                <input type="checkbox" value="None" id="toggle" name="check" />
+                <input type="checkbox" value="None" id="toggle" name="valve3" />
                 <label for="toggle">Valve 3</label>
             </div>
 
             <div class="toggle">
-                <input type="checkbox" value="None" id="toggle" name="check" />
+                <input type="checkbox" value="None" id="toggle" name="valve4" />
                 <label for="toggle">Valve 4</label>
             </div>
-
-
 
         </div>
         <div class="item footer">footer</div>
