@@ -1,7 +1,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type=text/javascript>
         $(function() {
-          $('a#test').on('click', function(e) {
+          $('#valve1').change(function(e) {
             console.log('Here')
             e.preventDefault()
             $.getJSON('/background_process_test',
@@ -19,6 +19,7 @@
     <h3>Test</h3>
         <form>
             <a href=# id=test><button class='btn btn-default'>Test</button></a>
+            <input type="checkbox" id="valve1" name="scales" checked>
         </form>
 
 </div>
