@@ -16,6 +16,7 @@ def index():
 def valve_toggle(valvename):
     #call change valve here
     pressure_controller.change_valve(valvename)
+    print('Here called '+valvename)
     return {valvename:'changed'}
 
 
