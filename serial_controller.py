@@ -8,12 +8,12 @@ class Controller():
         
         else:
             self.typeof_mc = 'V'
-            self.valve1state = false
-            self.valve2state = false
-            self.valve3state = false
-            self.valve4state = false
-            self.valve5state = false
-            self.valve6state = false
+            self.valve1state = False
+            self.valve2state = False
+            self.valve3state = False
+            self.valve4state = False
+            self.valve5state = False
+            self.valve6state = False
         
         self.ser = None
 
@@ -46,7 +46,7 @@ class Controller():
         return pressures
     
     def change_valve(self, valve):
-        
+
         if valve == 'valve1':
             ser.write('A'.encode())
         elif valve == 'valve2':
