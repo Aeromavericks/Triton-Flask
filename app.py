@@ -16,7 +16,6 @@ def index():
 def valve_toggle(valvename):
     #call change valve here
     valve_controller.change_valve(valvename)
-    print('Here called '+valvename)
     return {valvename:'changed'}
 
 @app.route('/test')
@@ -36,7 +35,7 @@ def update_pressure():
 @app.context_processor
 def inject_load():
     pressures = pressure_controller.get_p()
-
+    print(pressures)
     return {'load1': pressures[0], 'load5': pressures[1], 'load15': pressures[2]}
 
 if __name__ == '__main__':

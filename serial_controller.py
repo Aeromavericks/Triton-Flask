@@ -53,8 +53,6 @@ class Controller():
 
         if valve == 'valve1':
             self.ser.write('A'.encode())
-            print('Sent A')
-            print(self.ser.readline())
         elif valve == 'valve2':
             self.ser.write('B'.encode())
         elif valve == 'valve3':  
