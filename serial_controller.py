@@ -52,14 +52,14 @@ class Controller():
     def change_valve(self, valve):
 
         if valve == 'valve1':
-            ser.write('A'.encode())
+            self.ser.write('A'.encode())
         elif valve == 'valve2':
-            ser.write('B'.encode())
+            self.ser.write('B'.encode())
         elif valve == 'valve3':  
-            ser.write('C'.encode())
+            self.ser.write('C'.encode())
         elif valve == 'valve4':
-            ser.write('D'.encode())
+            self.ser.write('D'.encode())
         elif valve == 'valve5':
-            ser.write('E'.encode())
+            self.ser.write('E'.encode())
         elif valve == 'valve6':
-            ser.write('F'.encode())
+            self.ser.write('F'.encode())
