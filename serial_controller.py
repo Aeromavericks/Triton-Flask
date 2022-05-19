@@ -47,4 +47,4 @@ class Controller():
         return pressures
     
     def change_valve(self, valve):
-        
+        return 'n'
