@@ -15,7 +15,7 @@ def index():
 @app.route('/valve_toggle/<valvename>')
 def valve_toggle(valvename):
     #call change valve here
-    pressure_controller.change_valve(valvename)
+    valve_controller.change_valve(valvename)
     print('Here called '+valvename)
     return {valvename:'changed'}
 
