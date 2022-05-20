@@ -217,9 +217,12 @@ main {
 
     .container-2 {
     display: grid;
+    column-gap: 10px;
     grid-template-columns: 200px 200px;
-    grid-template-rows: 200px;
-    grid-gap: 1rem;
+    grid-template-rows: 200px ;
+    padding: 25px 20px;
+    border-radius: 7px;
+    background-color: #1f2933;
     }
 
 .pressure--block {
