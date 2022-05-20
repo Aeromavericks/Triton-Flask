@@ -10,7 +10,7 @@
     grid-template-areas:
         "header header header"
         "sidebar content-1 content-1"
-        "sidebar content-2 content-3"
+        "sidebar container-2 content-3"
         "footer footer footer";
 }
 
@@ -26,8 +26,8 @@
     grid-area: content-1;
 }
 
-.content-2 {
-    grid-area: content-2;
+.container-2 {
+    grid-area: container-2;
 }
 
 .content-3 {
@@ -77,8 +77,13 @@ body {
     background-image: linear-gradient(#00264d, #005e5e);
 }
 
+.container-2 {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    grid-template-rows: 200px;
+    grid-gap: 1rem;
+}
 .content-1,
-.content-2,
 .content-3 {
     background-image: linear-gradient (#00264d, #005e5e);
 }
