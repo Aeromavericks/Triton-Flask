@@ -53,6 +53,7 @@
         transform:rotate(225deg)}
         
     .gauge .ticks .tithe{
+        --gauge-tithe-tick: {{ load15 }}
         transform:rotate(calc(27deg * var(--gauge-tithe-tick) - 45deg));
         background:#000;
         position:relative;
