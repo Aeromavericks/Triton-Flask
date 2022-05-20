@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type=text/javascript>
@@ -24,8 +25,8 @@
           });
         });
 </script>
-<html>
 <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../static/styles.css">
     <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 
@@ -38,14 +39,73 @@
 
 <body>
 
-    <div class="container">
-        <div class="item header">Navigation</div>
-        <div class="item sidebar">sidebar</div>
-        <div class="item content-1">
-            {% include "loadavg.html" %}
-            {% block content %}{% endblock %}
+    <div class="inner">
+        <nav id="nav">
+            <div class="nav__container--logo">
+                <div class="logo">W</div>
+                <h1>AeroMavs</h1>
+            </div>
+
+            <ul class="nav-links">
+                <li>Dashboard</li>
+                <li>Data</li>
+                <li>Plots</li>
+                <li>Checklist</li>
+
+            </ul>
+        </nav>
+
+        <div class="menu">
+            <div class="line"></div>
         </div>
-        <div class="container-2">
+        <main>
+            <div class="main__col--1">
+                <h2>Overview</h2>
+            </div>
+
+            <div class="main__col--2">
+                <div class="box box--1">
+                    <div class="box--logo">
+                        <span class="iconify"
+                              data-inline="false"
+                              data-icon="fluent:people-32-filled"
+                              style="color: #ffffff; font-size: 40px"></span>
+                    </div>
+                    <div class="box--content">
+                        <p class="box--title">Oxidizer Tank</p>
+                        <p class="box--number">Filling</p>
+                    </div>
+                </div>
+
+                <div class="box box--2">
+                    <div class="box--logo">
+                        <span class="iconify"
+                              data-inline="false"
+                              data-icon="clarity:group-line"
+                              style="color: #ffffff; font-size: 40px"></span>
+                    </div>
+                    <div class="box--content">
+                        <p class="box--title">Fuel Tank</p>
+                        <p class="box--number">Ready</p>
+                    </div>
+                </div>
+
+                <div class="box box--3">
+                    <div class="box--logo">
+                        <span class="iconify"
+                              data-inline="false"
+                              data-icon="ant-design:cloud-download-outlined"
+                              style="color: #ffffff; font-size: 40px"></span>
+                    </div>
+                    <div class="box--content">
+                        <p class="box--title">Actuation Line Pressure</p>
+                        <p class="box--number">110 - Optimal</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main__col--3">
+               <div class="container-2">
             <div class="gauge">
                 <style>
                     .gauge{
@@ -104,34 +164,86 @@
                 </div>
             </div>
         </div>
-        <form>
-        <div class="item content-3">
-
-            <div class="toggle">
-                <input type="checkbox" value="None" id="toggle" name="valve1" />
-                <label for="toggle">Valve 1</label>
+                <div class="pressure--block">
+                    <h5>Total</h5>
+                    <span>20</span>
+                    <h5>Total waste in</h5>
+                    <span>564 kg</span>
+                    <h5>Total waste out</h5>
+                    <span>1205 kg</span>
+                </div>
             </div>
+        </main>
 
-            <div class="toggle">
-                <input type="checkbox" value="None" id="toggle" name="valve2" />
-                <label for="toggle">Valve 2</label>
+        <aside>
+            <div class="status-container">
+                <div class="status-container-up">
+                    <p class="system-status">System Status</p>
+                </div>
+                <div class="status-container-down">
+                    <p>Time</p>
+                    <span class="status-message">Ready</span>
+                </div>
             </div>
+            <div class="valve-actuation-container">
+                <h3>Valve Actuation</h3>
 
-            <div class="toggle">
-                <input type="checkbox" value="None" id="toggle" name="valve3" />
-                <label for="toggle">Valve 3</label>
+                <div class="valve-actuation">
+                    <div class="logo-grow">
+                        <span class="iconify"
+                              data-inline="false"
+                              data-icon="akar-icons:arrow-up-left"
+                              style="color: #ffffff; font-size: 24px"></span>
+                    </div>
+                    <div class="valve-info">
+                        <h6>Valve Toggle</h6>
+                        <p>Valve 1</p>
+                    </div>
+                </div>
+
+                <div class="valve-actuation">
+                    <div class="logo-grow">
+                        <span class="iconify"
+                              data-inline="false"
+                              data-icon="akar-icons:arrow-up-left"
+                              style="color: #ffffff; font-size: 24px"></span>
+                    </div>
+                    <div class="valve-info">
+                        <h6>Valve toggle</h6>
+                        <p>Valve 2</p>
+                    </div>
+                </div>
+
+                <div class="valve-actuation">
+                    <div class="logo-grow">
+                        <span class="iconify"
+                              data-inline="false"
+                              data-icon="akar-icons:arrow-up-left"
+                              style="color: #ffffff; font-size: 24px"></span>
+                    </div>
+                    <div class="valve-info">
+                        <h6>Valve Toggle</h6>
+                        <p>Valve 3</p>
+                    </div>
+                </div>
+
+                <div class="valve-actuation">
+                    <div class="logo-grow">
+                        <span class="iconify"
+                              data-inline="false"
+                              data-icon="akar-icons:arrow-up-left"
+                              style="color: #ffffff; font-size: 24px"></span>
+                    </div>
+                    <div class="valve-info">
+                        <h6>Valve Toggle</h6>
+                        <p>Valve 4</p>
+                    </div>
+                </div>
+
             </div>
-
-            <div class="toggle">
-                <input type="checkbox" value="None" id="toggle" name="valve4" />
-                <label for="toggle">Valve 4</label>
-            </div>
-
-        </div>
-    </form>
-
-        <div class="item footer">footer</div>
+        </aside>
     </div>
+
 
 </body>
 </html>
