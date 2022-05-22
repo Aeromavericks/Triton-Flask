@@ -31,8 +31,8 @@
     <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 
     <link rel="stylesheet" href="../static/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../static/gauge.min.css" />
-    <link rel="stylesheet" href="{{url_for('static', filename='gauge.min.css')}}">
+    <script src="../static/canvas-gauges/gauge.min.js"></script>
+    <script src='../static/chart.min.js'></script>
     {{ turbo() }}
 <title>AeroMavs TestFire</title>
 </head>
@@ -105,71 +105,76 @@
             </div>
 
             <div class="main__col--3">
-               <div class="container-2">
-            <div class="gauge">
-                <style>
-                    .gauge{
-                        --gauge-bg: #ffffff;
-                        --gauge-value:700;
-                        --gauge-display-value:700;
-                    }
-                </style>
-                <div class="ticks">
-                    <div class="tithe" style="--gauge-tithe-tick:1;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:2;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:3;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:4;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:6;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:7;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:8;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:9;"></div>
-                    <div class="min"></div>
-                    <div class="mid"></div>
-                    <div class="max"></div>
+                <div class="container-2">
+                    <div class="row-1">
+                        <div class="gauge-column">
+                            <canvas data-type="radial-gauge"
+                            data-width="200"
+                            data-height="200"
+                            data-units="PSI"
+                            data-title="false"
+                            data-value={{press}}
+                            data-min-value="0"
+                            data-max-value="1000"
+                            data-major-ticks="0,100,200,300,400,500,600,700,800,900,1000"
+                            data-minor-ticks="2"
+                            data-stroke-ticks="false"
+                            data-highlights='[
+                                { "from": 0, "to": 600, "color": "rgba(0,255,0,.15)" },
+                                { "from": 600, "to": 700, "color": "rgba(255,255,0,.15)" },
+                                { "from": 700, "to": 1000, "color": "rgba(255,30,0,.25)" }
+                            ]'
+                            data-color-plate="#222"
+                            data-color-major-ticks="#f5f5f5"
+                            data-color-minor-ticks="#ddd"
+                            data-color-title="#fff"
+                            data-color-units="#ccc"
+                            data-color-numbers="#eee"
+                            data-color-needle-start="rgba(240, 128, 128, 1)"
+                            data-color-needle-end="rgba(255, 160, 122, .9)"
+                            data-value-box="true"
+                            data-animation-rule="bounce"
+                            data-animation-duration="500"
+                            data-font-value="Led"
+                            data-animated-value="true"
+                            ></canvas>
+                            <p>P1</p>
+                        </div>
+                        <div class="gauge-column">
+                            <canvas data-type="radial-gauge"
+                            data-width="200"
+                            data-height="200"
+                            data-units="PSI"
+                            data-title="false"
+                            data-value={{press}}
+                            data-min-value="0"
+                            data-max-value="1000"
+                            data-major-ticks="0,100,200,300,400,500,600,700,800,900,1000"
+                            data-minor-ticks="2"
+                            data-stroke-ticks="false"
+                            data-highlights='[
+                                { "from": 0, "to": 600, "color": "rgba(0,255,0,.15)" },
+                                { "from": 600, "to": 700, "color": "rgba(255,255,0,.15)" },
+                                { "from": 700, "to": 1000, "color": "rgba(255,30,0,.25)" }
+                            ]'
+                            data-color-plate="#222"
+                            data-color-major-ticks="#f5f5f5"
+                            data-color-minor-ticks="#ddd"
+                            data-color-title="#fff"
+                            data-color-units="#ccc"
+                            data-color-numbers="#eee"
+                            data-color-needle-start="rgba(240, 128, 128, 1)"
+                            data-color-needle-end="rgba(255, 160, 122, .9)"
+                            data-value-box="true"
+                            data-animation-rule="bounce"
+                            data-animation-duration="500"
+                            data-font-value="Led"
+                            data-animated-value="true"
+                            ></canvas>
+                            <p>P2</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="tick-circle"></div>
-                <div class="needle">
-                    <div class="needle-head"></div>
-                </div>
-                <div class="labels">
-                    <div class="value-label"></div>
-                    <div class="tick-label-1"></div>
-                    <div class="tick-label-2"></div>
-                    <div class="tick-label-3"></div>
-                </div>
-            </div>
-            <div class="gauge">
-                <style>
-                    .gauge{
-                        --gauge-value-2:300;
-                        --gauge-display-value-2:300;
-                    }
-                </style>
-                <div class="ticks">
-                    <div class="tithe" style="--gauge-tithe-tick:1;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:2;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:3;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:4;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:6;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:7;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:8;"></div>
-                    <div class="tithe" style="--gauge-tithe-tick:9;"></div>
-                    <div class="min"></div>
-                    <div class="mid"></div>
-                    <div class="max"></div>
-                </div>
-                <div class="tick-circle"></div>
-                <div class="needle-2">
-                    <div class="needle-head-2"></div>
-                </div>
-                <div class="labels">
-                    <div class="value-label-2"></div>
-                    <div class="tick-label-1"></div>
-                    <div class="tick-label-2"></div>
-                    <div class="tick-label-3"></div>
-                </div>
-            </div>
-        </div>
                 <div class="pressure--block">
                     <h5>Total</h5>
                     <span>20</span>
@@ -177,6 +182,58 @@
                     <span>564 kg</span>
                     <h5>Total waste out</h5>
                     <span>1205 kg</span>
+                </div>
+            </div>
+            <div class="main__col--4">
+                <div class="pressure-plot-container">
+                    <canvas id="myChart"></canvas>
+        <p id="caption">The chart is displaying a simple line chart.</p>
+        <script>
+            // Global parameters:
+            // do not resize the chart canvas when its container does (keep at 600x400px)
+            Chart.responsive = true;
+
+            // define the chart data
+            var chartData = {
+            labels : [{% for item in labels %}
+                        "{{item}}",
+                        {% endfor %}],
+            datasets : [{
+                label: '{{ legend }}',
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(75,192,192,0.4)",
+                borderColor: "rgba(75,192,192,1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data : [{% for item in values %}
+                            {{item}},
+                        {% endfor %}],
+                spanGaps: false
+            }]
+            }
+
+            // get chart canvas
+            var ctx = document.getElementById("myChart").getContext("2d");
+
+            // create the chart using the chart canvas
+            var myChart = new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            });
+
+        </script>
                 </div>
             </div>
         </main>
