@@ -204,14 +204,26 @@ main {
 /* *******This is the container for the pressure plot******  */
 
         .container-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        "p1 p2";
         text-align: center;
-        padding: 25px 20px;
+        padding: 20px 20px;
         border-radius: 7px;
         background-color: #1f2933;
         color: white;
         }
-        .row-1{
+        
+        /*.row-1{
             width:auto;
+        }
+        */
+        .pressure-1 {
+            grid-area: p1;
+        }
+        .pressure-2 {
+            grid-area: p2;
         }
             .gauge-column{
                 float: left;
@@ -268,9 +280,9 @@ aside {
     border-radius: 7px;
     background: rgb(93, 109, 126);
     color: #fff;
-    padding: 25px;
+    padding: 15px;
     margin: 30px 0;
-    height: 190px;
+    height: 140px;
     max-width: 350px;
 }
 
@@ -284,6 +296,9 @@ aside {
     font-weight: bold;
 }
 
+/********************** Valve Actuation Switches Begin ***********************/
+
+
 .valve-actuation-container h3 {
     color: white;
     font-size: 28px;
@@ -291,10 +306,15 @@ aside {
 }
 
 .valve-actuation {
-    display: flex;
-    margin: 20px 0;
-    cursor: pointer;
-}
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-auto-rows: minmax(50px, auto);
+    padding: 5px;
+    margin: 5px;
+    cursor: auto;
+  }
+  
+
 
     .valve-actuation.translate {
         background: #2e325c;
@@ -304,23 +324,104 @@ aside {
         box-shadow: 0 3px 19px rgb(0 0 0 / 3%);
     }
 
-.logo-grow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 999px;
-    background: rgb(81, 129, 238);
-    background: linear-gradient( 115deg, rgba(81, 129, 238, 1) 24%, rgba(82, 130, 239, 1) 74% );
-    height: 50px;
-    width: 50px;
-}
-
 .valve-info {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-left: 20px;
+    margin-left: 5px;
 }
+
+/**************************************************************************/
+
+.checkboxGroup{ 
+    display:inline-block; 
+    align-items: center;
+    width:90px; border:none; 
+}
+.checkboxControl{ 
+	border:2px solid #102838; border-radius:7px; display:inline-block; width:80px; height:40px; padding-top:1px; padding-left:1px; position:relative; vertical-align:middle; margin:0 30px 10px 0; color:#297597;
+	box-shadow: 0 0 5px rgba(255,255,255,.4), 
+				0 2px 1px -1px rgba(255,255,255,.7) inset, 
+				8px 0 5px -5px #02425C inset,
+				-8px 0 5px -5px #02425C inset;
+	-moz-user-select:none; -webkit-user-select:none; 
+
+	background:#80DCE9;
+}
+	.checkboxControl input{ position:absolute; visibility:hidden; }
+	.checkboxControl > div{ 
+		background:-webkit-linear-gradient(left, #8FD9E4 0%,#A0F2FE 53%,#69DCF1 56%,#33AFCE 99%,#CEF5FF 100%);
+		background:linear-gradient(to right, #8FD9E4 0%,#A0F2FE 53%,#69DCF1 56%,#33AFCE 99%,#CEF5FF 100%);
+		box-shadow:-2px 0 1px 0 #A6F2FE inset;
+		border-radius:5px; line-height:35px; font-weight:bold; cursor:pointer; position:relative; z-index:1; text-shadow:0 1px rgba(255,255,255,0.5);
+		transform-origin:0 0; -webkit-transform-origin:0 0; 
+		transform:scaleX(0.93); -webkit-transform:scaleX(0.93);
+		transition:.1s; -webkit-transition:0.1s;
+	}
+	.checkboxControl div:first-letter{ 
+        padding-left:4px;
+        letter-spacing:50px; 
+    }
+	
+	.checkboxControl :checked ~ div{ 
+		transform-origin:100% 0; -webkit-transform-origin:100% 0;
+		box-shadow:2px 0 1px 0 #A6F2FE inset;
+		background:-webkit-linear-gradient(left, #CEF5FF 0%,#33AFCE 1%,#69DCF1 47%,#A0F2FE 50%,#8FD9E4 100%);
+		background:linear-gradient(to right, #CEF5FF 0%,#33AFCE 1%,#69DCF1 47%,#A0F2FE 50%,#8FD9E4 100%);
+	}
+	/* bottom shadow of 'upper' side of the button */
+	.checkboxControl > b{ position:absolute; bottom:0; right:0; width:50%; height:100%; border-radius:8px; -webkit-transform:skewY(5deg); transform:skewY(5deg); box-shadow: 0 6px 8px -5px #000; }
+	.checkboxControl :checked ~ b{ right:auto; left:0; -webkit-transform:skewY(-5deg); transform:skewY(-5deg); }
+
+	/* the light indicator to the right of the button */
+
+	.checkboxControl .indicator{ 
+        position:absolute; 
+        top:4px; right:-20px; 
+        width:8px; height:25px; 
+        box-shadow:0 0 8px #000 inset; 
+        border:1px solid rgba(255,255,255,0.1); border-radius:15px; 
+        transition:0.2s; -webkit-transition:0.2s; }
+	.checkboxControl .indicator:before{ 
+        content:''; 
+        display:inline-block; 
+        margin-top:8px; width:2px; height:8px; 
+        border-radius:10px; transition:0.5s; 
+        -webkit-transition:0.5s; }
+	.checkboxControl :checked ~ .indicator:before{ 
+        box-shadow:0 0 7px 6px #BAFC58; width:6px; 
+        background:#F0F9E3; 
+        transition:0.1s; -webkit-transition:0.1s; }
+
+
+/* the light indicator to the left of the button */
+.checkboxControl .indicatorOff{ 
+    position:absolute; 
+    top:4px; left:-20px; width:8px; height:25px; 
+    box-shadow:0 0 8px #000 inset; 
+    border:1px solid rgba(255,255,255,0.1); border-radius:15px; 
+    transition:0.2s; -webkit-transition:0.2s; }
+
+.checkboxControl .indicatorOff:before{ 
+    content:''; 
+    display:inline-block; 
+    margin-top:8px; width:2px; height:8px; 
+    border-radius:10px; transition:0.5s; 
+    -webkit-transition:0.5s; }
+
+.checkboxControl :not(:checked) ~ .indicatorOff:before{ 
+    box-shadow:0 0 7px 6px #f80404; width:6px; 
+    background:#F0F9E3; 
+    transition:0.1s; -webkit-transition:0.1s; }
+.checkboxControl :checked ~ .indicatorOff:before{ 
+    box-shadow:0 0 1px 1px rgba(0,0,0,0); width:1px; 
+    background:#000; 
+    transition:0.1s; -webkit-transition:0.1s; }
+
+   
+    /******************************************************/
+
+
 
     .valve-info h6 {
         color: white;
@@ -332,6 +433,8 @@ aside {
         color: #595d7c;
         font-size: 13px;
     }
+/********************** Valve Actuation Switches End ***********************/
+
 
 /* Responsive */
 @media screen and (max-width: 1213px) {
