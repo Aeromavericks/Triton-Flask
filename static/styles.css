@@ -210,10 +210,10 @@ main {
         background-color: #1f2933;
         color: white;
         }
-        .container-2 .row-1{
+        .row-1{
             width:auto;
         }
-            .container-2 .row-1 .gauge-column{
+            .gauge-column{
                 float: left;
                 width: 25%;
             }
@@ -268,9 +268,9 @@ aside {
     border-radius: 7px;
     background: rgb(93, 109, 126);
     color: #fff;
-    padding: 25px;
+    padding: 15px;
     margin: 30px 0;
-    height: 190px;
+    height: 140px;
     max-width: 350px;
 }
 
@@ -284,6 +284,9 @@ aside {
     font-weight: bold;
 }
 
+/********************** Valve Actuation Switches Begin ***********************/
+
+
 .valve-actuation-container h3 {
     color: white;
     font-size: 28px;
@@ -291,10 +294,15 @@ aside {
 }
 
 .valve-actuation {
-    display: flex;
-    margin: 20px 0;
-    cursor: pointer;
-}
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-auto-rows: minmax(50px, auto);
+    padding: 5px;
+    margin: 5px;
+    cursor: auto;
+  }
+  
+
 
     .valve-actuation.translate {
         background: #2e325c;
@@ -304,23 +312,177 @@ aside {
         box-shadow: 0 3px 19px rgb(0 0 0 / 3%);
     }
 
-.logo-grow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 999px;
-    background: rgb(81, 129, 238);
-    background: linear-gradient( 115deg, rgba(81, 129, 238, 1) 24%, rgba(82, 130, 239, 1) 74% );
-    height: 50px;
-    width: 50px;
-}
-
 .valve-info {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    margin-left: 20px;
+    margin-left: 5px;
 }
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tg-list {
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.tg-list-item {
+  margin: 0 2em;
+}
+
+h2 {
+  color: #777;
+}
+
+h4 {
+  color: #999;
+}
+
+.tgl {
+  display: none;
+}
+.tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
+  box-sizing: border-box;
+}
+.tgl::-moz-selection, .tgl:after::-moz-selection, .tgl:before::-moz-selection, .tgl *::-moz-selection, .tgl *:after::-moz-selection, .tgl *:before::-moz-selection, .tgl + .tgl-btn::-moz-selection {
+  background: none;
+}
+.tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
+  background: none;
+}
+.tgl + .tgl-btn {
+  outline: 0;
+  display: block;
+  width: 4em;
+  height: 2em;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+}
+.tgl + .tgl-btn:after {
+  left: 0;
+}
+.tgl + .tgl-btn:before {
+  display: none;
+}
+.tgl:checked + .tgl-btn:after {
+  left: 50%;
+}
+
+.tgl-flip + .tgl-btn {
+  padding: 2px;
+  transition: all 0.2s ease;
+  font-family: sans-serif;
+  perspective: 100px;
+}
+.tgl-flip + .tgl-btn:after, .tgl-flip + .tgl-btn:before {
+  display: inline-block;
+  transition: all 0.4s ease;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  line-height: 2em;
+  font-weight: bold;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border-radius: 4px;
+}
+.tgl-flip + .tgl-btn:after {
+  content: attr(data-tg-on);
+  background: #02C66F;
+  transform: rotateY(-180deg);
+}
+.tgl-flip + .tgl-btn:before {
+  background: #FF3A19;
+  content: attr(data-tg-off);
+}
+.tgl-flip + .tgl-btn:active:before {
+  transform: rotateY(-20deg);
+}
+.tgl-flip:checked + .tgl-btn:before {
+  transform: rotateY(180deg);
+}
+.tgl-flip:checked + .tgl-btn:after {
+  transform: rotateY(0);
+  left: 0;
+  background: #7FC6A6;
+}
+.tgl-flip:checked + .tgl-btn:active:after {
+  transform: rotateY(20deg);
+}
+
+
+/**************************************************************************/
+
+.checkboxGroup{ 
+    display:inline-block; 
+    align-items: center;
+
+    width:90px; border:none; 
+}
+.checkboxControl{ 
+	border:2px solid #102838; border-radius:7px; display:inline-block; width:80px; height:40px; padding-top:1px; padding-left:1px; position:relative; vertical-align:middle; margin:0 30px 10px 0; color:#297597;
+	box-shadow: 0 0 5px rgba(255,255,255,.4), 
+				0 2px 1px -1px rgba(255,255,255,.7) inset, 
+				8px 0 5px -5px #02425C inset,
+				-8px 0 5px -5px #02425C inset;
+	-moz-user-select:none; -webkit-user-select:none;
+	background:#80DCE9;
+}
+	.checkboxControl input{ position:absolute; visibility:hidden; }
+	.checkboxControl > div{ 
+		background:-webkit-linear-gradient(left, #8FD9E4 0%,#A0F2FE 53%,#69DCF1 56%,#33AFCE 99%,#CEF5FF 100%);
+		background:linear-gradient(to right, #8FD9E4 0%,#A0F2FE 53%,#69DCF1 56%,#33AFCE 99%,#CEF5FF 100%);
+		box-shadow:-2px 0 1px 0 #A6F2FE inset;
+		border-radius:5px; line-height:35px; font-weight:bold; cursor:pointer; position:relative; z-index:1; text-shadow:0 1px rgba(255,255,255,0.5);
+		
+		transform-origin:0 0; -webkit-transform-origin:0 0; 
+		transform:scaleX(0.93); -webkit-transform:scaleX(0.93);
+		transition:.1s; -webkit-transition:0.1s;
+	}
+	.checkboxControl div:first-letter{ 
+        padding-left:4px;
+        letter-spacing:50px; 
+    }
+	
+	.checkboxControl :checked ~ div{ 
+		transform-origin:100% 0; -webkit-transform-origin:100% 0;
+		box-shadow:2px 0 1px 0 #A6F2FE inset;
+		background:-webkit-linear-gradient(left, #CEF5FF 0%,#33AFCE 1%,#69DCF1 47%,#A0F2FE 50%,#8FD9E4 100%);
+		background:linear-gradient(to right, #CEF5FF 0%,#33AFCE 1%,#69DCF1 47%,#A0F2FE 50%,#8FD9E4 100%);
+	}
+	/* bottom shadow of 'upper' side of the button */
+	.checkboxControl > b{ position:absolute; bottom:0; right:0; width:50%; height:100%; border-radius:8px; -webkit-transform:skewY(5deg); transform:skewY(5deg); box-shadow: 0 6px 8px -5px #000; }
+	.checkboxControl :checked ~ b{ right:auto; left:0; -webkit-transform:skewY(-5deg); transform:skewY(-5deg); }
+	/* the light indicator to the right of the button */
+	.checkboxControl .indicator{ position:absolute; top:4px; right:-20px; width:8px; height:25px; box-shadow:0 0 8px #000 inset; border:1px solid rgba(255,255,255,0.1); border-radius:15px; transition:0.2s; -webkit-transition:0.2s; }
+	.checkboxControl .indicator:before{ content:''; display:inline-block; margin-top:8px; width:2px; height:8px; border-radius:10px; transition:0.5s; -webkit-transition:0.5s; }
+	.checkboxControl :checked ~ .indicator:before{ box-shadow:0 0 7px 6px #BAFC58; width:6px; background:#F0F9E3; transition:0.1s; -webkit-transition:0.1s; }
+
+
+/******************************************************/
+
+
 
     .valve-info h6 {
         color: white;
@@ -332,6 +494,8 @@ aside {
         color: #595d7c;
         font-size: 13px;
     }
+/********************** Valve Actuation Switches End ***********************/
+
 
 /* Responsive */
 @media screen and (max-width: 1213px) {

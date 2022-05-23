@@ -33,6 +33,8 @@
     <link rel="stylesheet" href="../static/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="../static/canvas-gauges/gauge.min.js"></script>
     <script src='../static/chart.min.js'></script>
+    <script src="../static/jquery/dist/jquery.min.js"></script>
+    <script src="../static/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     {{ turbo() }}
 <title>AeroMavs TestFire</title>
 </head>
@@ -132,52 +134,73 @@
                 </div>
             </div>
             <div class="main__col--4">
-                <div id="pressure-plot-container" class="pressure-plot-container">
-                    <canvas id="myChart"></canvas>
+                <div id="pressure-plot-container" class="pressure-plot-container" onload="update_values();">
+                    <canvas id="myChart" width="300px" height="200px"></canvas>
                     <p id="caption">The chart is displaying a simple line chart.</p>
-                    <script id="chart">
-                        // Global parameters:
-                        // do not resize the chart canvas when its container does (keep at 600x400px)
-                        Chart.responsive = true;
+                    <script>
+                        $(document).ready(function () {
+                            const config = {
+                                type: 'line',
+                                data: {
+                                    labels: Array(30).fill("0000-00-00 00:00:00"),
+                                    datasets: [{
+                                        label: "Random Dataset",
+                                        backgroundColor: 'rgb(255, 99, 132)',
+                                        borderColor: 'rgb(255, 99, 132)',
+                                        data: Array(30).fill(null),
+                                        fill: false,
+                                    }],
+                                },
+                                options: {
+                                    responsive: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Creating Real-Time Charts with Flask'
+                                    },
+                                    tooltips: {
+                                        mode: 'index',
+                                        intersect: false,
+                                    },
+                                    hover: {
+                                        mode: 'nearest',
+                                        intersect: true
+                                    },
+                                    scales: {
+                                        xAxes: [{
+                                            display: true,
+                                            scaleLabel: {
+                                                display: true,
+                                                labelString: 'Time'
+                                            }
+                                        }],
+                                        yAxes: [{
+                                            display: true,
+                                            scaleLabel: {
+                                                display: true,
+                                                labelString: 'Value'
+                                            }
+                                        }]
+                                    }
+                                }
+                            };
                     
-                        // define the chart data
-                        var chartData = {
-                        //labels : [{% for item in labels %}
-                        //          "{{item}}",
-                            //        {% endfor %}],
-                        datasets : [{
-                            label: '{{ legend }}',
-                            fill: true,
-                            lineTension: 0.1,
-                            backgroundColor: "rgba(75,192,192,0.4)",
-                            borderColor: "rgba(75,192,192,1)",
-                            borderCapStyle: 'butt',
-                            borderDash: [],
-                            borderDashOffset: 0.0,
-                            borderJoinStyle: 'miter',
-                            pointBorderColor: "rgba(75,192,192,1)",
-                            pointBackgroundColor: "#fff",
-                            pointBorderWidth: 1,
-                            pointHoverRadius: 5,
-                            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                            pointHoverBorderColor: "rgba(220,220,220,1)",
-                            pointHoverBorderWidth: 2,
-                            pointRadius: 1,
-                            pointHitRadius: 10,
-                            data : {{values}},
-                            spanGaps: false
-                        }]
-                        }
+                            const context = document.getElementById('myChart').getContext('2d');
                     
-                        // get chart canvas
-                        var ctx = document.getElementById("myChart").getContext("2d");
+                            const lineChart = new Chart(context, config);
                     
-                        // create the chart using the chart canvas
-                        var myChart = new Chart(ctx, {
-                        type: 'line',
-                        data: chartData,
+                            const source = new EventSource("/chart-data");
+                    
+                            source.onmessage = function (event) {
+                                const data = JSON.parse(event.data);
+                                if (config.data.labels.length === 30) {
+                                    config.data.labels.shift();
+                                    config.data.datasets[0].data.shift();
+                                }
+                                config.data.labels.push(data.time);
+                                config.data.datasets[0].data.push(data.value);
+                                lineChart.update();
+                            }
                         });
-                    
                     </script>
                 </div>
             </div>
