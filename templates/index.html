@@ -108,10 +108,10 @@
 
             <div class="main__col--3">
     
-                <div class="container-2">
+                <div class="container-2" onload="update_values();">
                     <div class="row-1">
                         <div class="gauge-column"> 
-                            {% include "rand.html" %}
+                            <canvas id="gauge1" data-type="radial-gauge"></canvas>
                             <p>P1</p>
                         </div>
                         <div class="gauge-column">
@@ -120,7 +120,63 @@
                         </div>
                         
                         <script>
-                            
+                            $(document).ready(function () {
+                                const config_gauge = {
+                                    renderTo: 'gauge1',
+                                    width: 300,
+                                    height: 300,
+                                    units: "Km/h",
+                                    value:0,
+                                    minValue: 0,
+                                    maxValue: 220,
+                                    majorTicks: [
+                                        "0",
+                                        "20",
+                                        "40",
+                                        "60",
+                                        "80",
+                                        "100",
+                                        "120",
+                                        "140",
+                                        "160",
+                                        "180",
+                                        "200",
+                                        "220"
+                                    ],
+                                    minorTicks: 2,
+                                    strokeTicks: true,
+                                    highlights: [
+                                        {
+                                            "from": 160,
+                                            "to": 220,
+                                            "color": "rgba(200, 50, 50, .75)"
+                                        }
+                                    ],
+                                    colorPlate: "#fff",
+                                    borderShadowWidth: 0,
+                                    borders: false,
+                                    needleType: "arrow",
+                                    needleWidth: 2,
+                                    needleCircleSize: 7,
+                                    needleCircleOuter: true,
+                                    needleCircleInner: false,
+                                    animationDuration: 100,
+                                    animationRule: "linear"
+                                }
+
+                    
+                                var radial = new RadialGauge(config_gauge);
+
+                                const source = new EventSource("/data");
+
+                                source.onmessage = function (event) {
+                                    const data = JSON.parse(event.data);
+                                    const value = Integer.parseInt(data.value)
+                                    console.log(value);
+                                    config_gauge.value=value;
+                                    radial.draw();
+                                }
+                            });
                         </script>
                     </div>
                 </div>
@@ -188,7 +244,7 @@
                     
                             const lineChart = new Chart(context, config);
                     
-                            const source = new EventSource("/chart-data");
+                            const source = new EventSource("/data");
                     
                             source.onmessage = function (event) {
                                 const data = JSON.parse(event.data);

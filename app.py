@@ -1,3 +1,4 @@
+from re import S
 from flask import Flask, render_template, request, stream_with_context, Response
 import serial_controller
 from turbo_flask import Turbo
@@ -18,30 +19,38 @@ values = [600]
 @app.route('/')
 def index():
     return render_template('index.html')
-
+def ip():
+    if request.headers.getlist("X-Forwarded-For"):
+        client_ip = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        client_ip = request.remote_addr or ""
+    return client_ip
 def generate_random_data() -> Iterator[str]:
     """
     Generates random value between 0 and 100
     :return: String containing current timestamp (YYYY-mm-dd HH:MM:SS) and randomly generated data.
     """
-    if request.headers.getlist("X-Forwarded-For"):
-        client_ip = request.headers.getlist("X-Forwarded-For")[0]
-    else:
-        client_ip = request.remote_addr or ""
-
     try:
-        logger.info("Client %s connected", client_ip)
+        logger.info("Client %s connected", ip())
         while True:
-            json_data = json.dumps(
+            time.sleep(0.5)
+            json_data_chart = json.dumps(
                 {
                     "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     "value": random.randrange(0,1000,1),
                 }
             )
-            yield f"data:{json_data}\n\n"
-            time.sleep(1)
+            
+            yield f"data:{json_data_chart}\n\n"
+            #value = random.randrange(0,1000,1)
+            #gauge1_value = json.dumps(
+             #   {
+              #      "value":value
+               # }
+            #)
+            #yield f"value:{gauge1_value}\n"
     except GeneratorExit:
-        logger.info("Client %s disconnected", client_ip)
+        logger.info("Client %s disconnected", ip())
 
 
 #@app.route('/valve_toggle/<valvename>')
@@ -50,12 +59,13 @@ def generate_random_data() -> Iterator[str]:
     #valve_controller.change_valve(valvename)
     #return {valvename:'changed'}
 
-@app.route("/chart-data")
+@app.route("/data")
 def chart_data() -> Response:
     response = Response(stream_with_context(generate_random_data()), mimetype="text/event-stream")
     response.headers["Cache-Control"] = "no-cache"
     response.headers["X-Accel-Buffering"] = "no"
     return response
+
 
 @app.before_first_request
 def before_first_request():
