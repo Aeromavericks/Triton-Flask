@@ -1,21 +1,19 @@
 from flask import Flask, render_template
 import serial_controller
 from turbo_flask import Turbo
-import threading, time, sys
+import threading, time, sys, random,json
 
 app = Flask(__name__)
 turbo = Turbo(app)
 #pressure_controller = serial_controller.Controller('pressure')
 
 #valve_controller = serial_controller.Controller('valve')
-press = '100'
-
+values = [600]
 @app.route('/')
 def index():
-    legend = 'Monthly Data'
-    labels = ["January", "February", "March", "April", "May", "June", "July", "August"]
-    values = [10, 9, 8, 7, 6, 4, 7, 8]
-    return render_template('index.html', press = press,values=values, labels=labels, legend=legend)
+    legend = 'Random Num'
+    return render_template('index.html',legend=legend)
+
 
 #@app.route('/valve_toggle/<valvename>')
 #def valve_toggle(valvename):
@@ -23,9 +21,27 @@ def index():
     #valve_controller.change_valve(valvename)
     #return {valvename:'changed'}
 
-#@app.before_first_request
-#def before_first_request():
+@app.before_first_request
+def before_first_request():
     #threading.Thread(target=update_pressure).start()
+    threading.Thread(target=update_rand).start()
+
+def update_rand():
+    with app.app_context():
+        while True:
+            time.sleep(0.5)
+            print('Update send')
+            turbo.push(turbo.replace(render_template('rand.html'),'radial-gauge-1'))
+            turbo.push(turbo.replace(render_template('rand2.html'),'radial-gauge-2'))
+
+@app.context_processor
+def inject_rand():
+    press = random.randrange(0,1000,1)
+    pressStr = str(press)
+    values.append(press)
+    print(press)
+    return {'rand1': press}
+
 
 #def update_pressure():
     #with app.app_context():

@@ -210,10 +210,10 @@ main {
         background-color: #1f2933;
         color: white;
         }
-        .row-1{
+        .container-2 .row-1{
             width:auto;
         }
-            .gauge-column{
+            .container-2 .row-1 .gauge-column{
                 float: left;
                 width: 25%;
             }
