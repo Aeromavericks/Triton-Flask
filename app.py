@@ -37,7 +37,8 @@ def generate_random_data() -> Iterator[str]:
             json_data_chart = json.dumps(
                 {
                     "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    "value": random.randrange(0,1000,1),
+                    "value1": random.randrange(0,1000,1),
+                    "value2": random.randrange(0,1000,1),
                 }
             )
             
