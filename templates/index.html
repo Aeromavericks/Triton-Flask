@@ -33,8 +33,8 @@
     <link rel="stylesheet" href="../static/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="../static/canvas-gauges/gauge.min.js"></script>
     <script src='../static/chart.min.js'></script>
-    <script src="../static/jquery/dist/jquery.min.js"></script>
-    <script src="../static/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../static/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     {{ turbo() }}
 <title>AeroMavs TestFire</title>
 </head>
@@ -69,8 +69,8 @@
                 <div class="box box--1">
                     <div class="box--logo">
                         <span class="iconify"
-                              data-inline="false"
-                              data-icon="fluent:people-32-filled"
+                              inline="false"
+                              icon="fluent:people-32-filled"
                               style="color: #ffffff; font-size: 40px"></span>
                     </div>
                     <div class="box--content">
@@ -82,8 +82,8 @@
                 <div class="box box--2">
                     <div class="box--logo">
                         <span class="iconify"
-                              data-inline="false"
-                              data-icon="clarity:group-line"
+                              inline="false"
+                              icon="clarity:group-line"
                               style="color: #ffffff; font-size: 40px"></span>
                     </div>
                     <div class="box--content">
@@ -95,8 +95,8 @@
                 <div class="box box--3">
                     <div class="box--logo">
                         <span class="iconify"
-                              data-inline="false"
-                              data-icon="ant-design:cloud-download-outlined"
+                              inline="false"
+                              icon="ant-design:cloud-download-outlined"
                               style="color: #ffffff; font-size: 40px"></span>
                     </div>
                     <div class="box--content">
@@ -111,70 +111,92 @@
                 <div class="container-2" onload="update_values();">
                     <div class="row-1">
                         <div class="gauge-column"> 
-                            <canvas id="gauge1" data-type="radial-gauge"></canvas>
+                            <canvas id="gauge1" type="radial-gauge"></canvas>
                             <p>P1</p>
                         </div>
                         <div class="gauge-column">
-                            {% include "rand2.html" %}
+                            <canvas id="gauge2" type="radial-gauge"></canvas>
                             <p>P2</p>
                         </div>
                         
                         <script>
                             $(document).ready(function () {
-                                const config_gauge = {
+                                const config_gauge1 = {
                                     renderTo: 'gauge1',
-                                    width: 300,
-                                    height: 300,
-                                    units: "Km/h",
+                                    width:200,
+                                    height:200,
+                                    units:"PSI",
+                                    title:false,
                                     value:0,
-                                    minValue: 0,
-                                    maxValue: 220,
-                                    majorTicks: [
-                                        "0",
-                                        "20",
-                                        "40",
-                                        "60",
-                                        "80",
-                                        "100",
-                                        "120",
-                                        "140",
-                                        "160",
-                                        "180",
-                                        "200",
-                                        "220"
+                                    minValue:0,
+                                    maxValue:1000,
+                                    majorTicks:["0","100","200","300","400","500","600","700","800","900","1000"],
+                                    minorTicks:2,
+                                    strokeTicks:false,
+                                    highlights:[
+                                        { "from": 0, "to": 600, "color": "rgba(0,255,0,.15)" },
+                                        { "from": 600, "to": 700, "color": "rgba(255,255,0,.15)" },
+                                        { "from": 700, "to": 1000, "color": "rgba(255,30,0,.25)" }
                                     ],
-                                    minorTicks: 2,
-                                    strokeTicks: true,
-                                    highlights: [
-                                        {
-                                            "from": 160,
-                                            "to": 220,
-                                            "color": "rgba(200, 50, 50, .75)"
-                                        }
+                                    colorPlate:"#222",
+                                    colorMajorTicks:"#f5f5f5",
+                                    colorMinorTicks:"#ddd",
+                                    colorTitle:"#fff",
+                                    colorUnits:"#ccc",
+                                    colorNumbers:"#eee",
+                                    colorNeedleStart:"rgba(240, 128, 128, 1)",
+                                    colorNeedleEnd:"rgba(255, 160, 122, .9)",
+                                    valueBox:"true",
+                                    animationRule:"linear",
+                                    animationDuration:"500",
+                                    fontValue:"Led",
+                                    animatedValue:"true"
+                                }
+                                const config_gauge2 = {
+                                    renderTo: 'gauge2',
+                                    width:200,
+                                    height:200,
+                                    units:"PSI",
+                                    title:false,
+                                    value:0,
+                                    minValue:0,
+                                    maxValue:1000,
+                                    majorTicks:["0","100","200","300","400","500","600","700","800","900","1000"],
+                                    minorTicks:2,
+                                    strokeTicks:false,
+                                    highlights:[
+                                        { "from": 0, "to": 600, "color": "rgba(0,255,0,.15)" },
+                                        { "from": 600, "to": 700, "color": "rgba(255,255,0,.15)" },
+                                        { "from": 700, "to": 1000, "color": "rgba(255,30,0,.25)" }
                                     ],
-                                    colorPlate: "#fff",
-                                    borderShadowWidth: 0,
-                                    borders: false,
-                                    needleType: "arrow",
-                                    needleWidth: 2,
-                                    needleCircleSize: 7,
-                                    needleCircleOuter: true,
-                                    needleCircleInner: false,
-                                    animationDuration: 100,
-                                    animationRule: "linear"
+                                    colorPlate:"#222",
+                                    colorMajorTicks:"#f5f5f5",
+                                    colorMinorTicks:"#ddd",
+                                    colorTitle:"#fff",
+                                    colorUnits:"#ccc",
+                                    colorNumbers:"#eee",
+                                    colorNeedleStart:"rgba(240, 128, 128, 1)",
+                                    colorNeedleEnd:"rgba(255, 160, 122, .9)",
+                                    valueBox:"true",
+                                    animationRule:"linear",
+                                    animationDuration:"500",
+                                    fontValue:"Led",
+                                    animatedValue:"true"
                                 }
 
                     
-                                var radial = new RadialGauge(config_gauge);
+                                var radial1 = new RadialGauge(config_gauge1);
+                                var radial2 = new RadialGauge(config_gauge2);
 
                                 const source = new EventSource("/data");
 
                                 source.onmessage = function (event) {
                                     const data = JSON.parse(event.data);
-                                    const value = Integer.parseInt(data.value)
-                                    console.log(value);
-                                    config_gauge.value=value;
-                                    radial.draw();
+                                    value = Number(data.value);
+                                    radial1.value=value
+                                    radial2.value=value
+                                    radial1.update();
+                                    radial2.update();
                                 }
                             });
                         </script>
@@ -208,34 +230,34 @@
                                     }],
                                 },
                                 options: {
-                                    responsive: true,
-                                    title: {
-                                        display: true,
-                                        text: 'Creating Real-Time Charts with Flask'
-                                    },
-                                    tooltips: {
-                                        mode: 'index',
-                                        intersect: false,
-                                    },
-                                    hover: {
-                                        mode: 'nearest',
-                                        intersect: true
-                                    },
-                                    scales: {
-                                        xAxes: [{
+                                    plugins: {
+                                        responsive: true,
+                                        title: {
                                             display: true,
-                                            scaleLabel: {
+                                            text: 'Creating Real-Time Charts with Flask'
+                                        },
+                                        tooltips: {
+                                            mode: 'index',
+                                            intersect: false,
+                                        },
+                                        hover: {
+                                            mode: 'nearest',
+                                            intersect: true
+                                        },
+                                        scales: {
+                                            
+                                            xAxes: [{
                                                 display: true,
-                                                labelString: 'Time'
-                                            }
-                                        }],
-                                        yAxes: [{
-                                            display: true,
-                                            scaleLabel: {
-                                                display: true,
-                                                labelString: 'Value'
-                                            }
-                                        }]
+                                                scaleLabel: {
+                                                    labelString: 'Time'
+                                                }
+                                            }],
+                                            yAxes: [{
+                                                scaleLabel: {
+                                                    labelString: 'Value'
+                                                }
+                                            }]
+                                        }
                                     }
                                 }
                             };
@@ -278,8 +300,8 @@
                 <div class="valve-actuation">
                     <div class="logo-grow">
                         <span class="iconify"
-                              data-inline="false"
-                              data-icon="akar-icons:arrow-up-left"
+                              inline="false"
+                              icon="akar-icons:arrow-up-left"
                               style="color: #ffffff; font-size: 24px"></span>
                     </div>
                     <div class="valve-info">
@@ -291,8 +313,8 @@
                 <div class="valve-actuation">
                     <div class="logo-grow">
                         <span class="iconify"
-                              data-inline="false"
-                              data-icon="akar-icons:arrow-up-left"
+                              inline="false"
+                              icon="akar-icons:arrow-up-left"
                               style="color: #ffffff; font-size: 24px"></span>
                     </div>
                     <div class="valve-info">
@@ -304,8 +326,8 @@
                 <div class="valve-actuation">
                     <div class="logo-grow">
                         <span class="iconify"
-                              data-inline="false"
-                              data-icon="akar-icons:arrow-up-left"
+                              inline="false"
+                              icon="akar-icons:arrow-up-left"
                               style="color: #ffffff; font-size: 24px"></span>
                     </div>
                     <div class="valve-info">
@@ -317,8 +339,8 @@
                 <div class="valve-actuation">
                     <div class="logo-grow">
                         <span class="iconify"
-                              data-inline="false"
-                              data-icon="akar-icons:arrow-up-left"
+                              inline="false"
+                              icon="akar-icons:arrow-up-left"
                               style="color: #ffffff; font-size: 24px"></span>
                     </div>
                     <div class="valve-info">

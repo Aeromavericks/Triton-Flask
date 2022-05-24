@@ -67,26 +67,9 @@ def chart_data() -> Response:
     return response
 
 
-@app.before_first_request
-def before_first_request():
+#@app.before_first_request
+#def before_first_request():
     #threading.Thread(target=update_pressure).start()
-    threading.Thread(target=update_rand).start()
-
-def update_rand():
-    with app.app_context():
-        while True:
-            time.sleep(0.5)
-            print('Update send')
-            turbo.push(turbo.replace(render_template('rand.html'),'radial-gauge-1'))
-            turbo.push(turbo.replace(render_template('rand2.html'),'radial-gauge-2'))
-
-@app.context_processor
-def inject_rand():
-    press = random.randrange(0,1000,1)
-    pressStr = str(press)
-    values.append(press)
-    print(press)
-    return {'rand1': press}
 
 
 #def update_pressure():
