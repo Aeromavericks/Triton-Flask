@@ -109,99 +109,94 @@
             <div class="main__col--3">
     
                 <div class="container-2" onload="update_values();">
-                    <div class="row-1">
-                        <div class="gauge-column"> 
-                            <canvas id="gauge1" type="radial-gauge"></canvas>
-                            <p>P1</p>
-                        </div>
-                        <div class="gauge-column">
-                            <canvas id="gauge2" type="radial-gauge"></canvas>
-
-                            <p>P2</p>
-                        </div>
-                        
-                        <script>
-                            $(document).ready(function () {
-                                const config_gauge1 = {
-                                    renderTo: 'gauge1',
-                                    width:200,
-                                    height:200,
-                                    units:"PSI",
-                                    title:false,
-                                    value:0,
-                                    minValue:0,
-                                    maxValue:1000,
-                                    majorTicks:["0","100","200","300","400","500","600","700","800","900","1000"],
-                                    minorTicks:2,
-                                    strokeTicks:false,
-                                    highlights:[
-                                        { "from": 0, "to": 600, "color": "rgba(0,255,0,.15)" },
-                                        { "from": 600, "to": 700, "color": "rgba(255,255,0,.15)" },
-                                        { "from": 700, "to": 1000, "color": "rgba(255,30,0,.25)" }
-                                    ],
-                                    colorPlate:"#222",
-                                    colorMajorTicks:"#f5f5f5",
-                                    colorMinorTicks:"#ddd",
-                                    colorTitle:"#fff",
-                                    colorUnits:"#ccc",
-                                    colorNumbers:"#eee",
-                                    colorNeedleStart:"rgba(240, 128, 128, 1)",
-                                    colorNeedleEnd:"rgba(255, 160, 122, .9)",
-                                    valueBox:"true",
-                                    animationRule:"linear",
-                                    animationDuration:"500",
-                                    fontValue:"Led",
-                                    animatedValue:"true"
-                                }
-                                const config_gauge2 = {
-                                    renderTo: 'gauge2',
-                                    width:200,
-                                    height:200,
-                                    units:"PSI",
-                                    title:false,
-                                    value:0,
-                                    minValue:0,
-                                    maxValue:1000,
-                                    majorTicks:["0","100","200","300","400","500","600","700","800","900","1000"],
-                                    minorTicks:2,
-                                    strokeTicks:false,
-                                    highlights:[
-                                        { "from": 0, "to": 600, "color": "rgba(0,255,0,.15)" },
-                                        { "from": 600, "to": 700, "color": "rgba(255,255,0,.15)" },
-                                        { "from": 700, "to": 1000, "color": "rgba(255,30,0,.25)" }
-                                    ],
-                                    colorPlate:"#222",
-                                    colorMajorTicks:"#f5f5f5",
-                                    colorMinorTicks:"#ddd",
-                                    colorTitle:"#fff",
-                                    colorUnits:"#ccc",
-                                    colorNumbers:"#eee",
-                                    colorNeedleStart:"rgba(240, 128, 128, 1)",
-                                    colorNeedleEnd:"rgba(255, 160, 122, .9)",
-                                    valueBox:"true",
-                                    animationRule:"linear",
-                                    animationDuration:"500",
-                                    fontValue:"Led",
-                                    animatedValue:"true"
-                                }
-
+                    <div class="gauge-column"> 
+                        <canvas id="gauge1" type="radial-gauge"></canvas>
+                    </div>
+                    <div class="gauge-column">
+                        <canvas id="gauge2" type="radial-gauge"></canvas>
+                    </div>
                     
-                                var radial1 = new RadialGauge(config_gauge1);
-                                var radial2 = new RadialGauge(config_gauge2);
+                    <script>
+                        $(document).ready(function () {
+                            const config_gauge1 = {
+                                renderTo: 'gauge1',
+                                width:200,
+                                height:200,
+                                units:"PSI",
+                                title:"P1",
+                                value:0,
+                                minValue:0,
+                                maxValue:1000,
+                                majorTicks:["0","100","200","300","400","500","600","700","800","900","1000"],
+                                minorTicks:2,
+                                strokeTicks:false,
+                                highlights:[
+                                    { "from": 0, "to": 600, "color": "rgba(0,255,0,.15)" },
+                                    { "from": 600, "to": 700, "color": "rgba(255,255,0,.15)" },
+                                    { "from": 700, "to": 1000, "color": "rgba(255,30,0,.25)" }
+                                ],
+                                colorPlate:"#222",
+                                colorMajorTicks:"#f5f5f5",
+                                colorMinorTicks:"#ddd",
+                                colorTitle:"#fff",
+                                colorUnits:"#ccc",
+                                colorNumbers:"#eee",
+                                colorNeedleStart:"rgba(240, 128, 128, 1)",
+                                colorNeedleEnd:"rgba(255, 160, 122, .9)",
+                                valueBox:"true",
+                                animationRule:"linear",
+                                animationDuration:"500",
+                                fontValue:"Led",
+                                animatedValue:"true"
+                            }
+                            const config_gauge2 = {
+                                renderTo: 'gauge2',
+                                width:200,
+                                height:200,
+                                units:"PSI",
+                                title:"P2",
+                                value:0,
+                                minValue:0,
+                                maxValue:1000,
+                                majorTicks:["0","100","200","300","400","500","600","700","800","900","1000"],
+                                minorTicks:2,
+                                strokeTicks:false,
+                                highlights:[
+                                    { "from": 0, "to": 600, "color": "rgba(0,255,0,.15)" },
+                                    { "from": 600, "to": 700, "color": "rgba(255,255,0,.15)" },
+                                    { "from": 700, "to": 1000, "color": "rgba(255,30,0,.25)" }
+                                ],
+                                colorPlate:"#222",
+                                colorMajorTicks:"#f5f5f5",
+                                colorMinorTicks:"#ddd",
+                                colorTitle:"#fff",
+                                colorUnits:"#ccc",
+                                colorNumbers:"#eee",
+                                colorNeedleStart:"rgba(240, 128, 128, 1)",
+                                colorNeedleEnd:"rgba(255, 160, 122, .9)",
+                                valueBox:"true",
+                                animationRule:"linear",
+                                animationDuration:"500",
+                                fontValue:"Led",
+                                animatedValue:"true"
+                            }
 
-                                const source = new EventSource("/data");
+                
+                            var radial1 = new RadialGauge(config_gauge1);
+                            var radial2 = new RadialGauge(config_gauge2);
 
-                                source.onmessage = function (event) {
-                                    const data = JSON.parse(event.data);
-                                    value = Number(data.value);
-                                    radial1.value=value
-                                    radial2.value=value
-                                    radial1.update();
-                                    radial2.update();
-                                }
-                            });
-                        </script>
-                   <!-- </div>   --> 
+                            const source = new EventSource("/data");
+
+                            source.onmessage = function (event) {
+                                const data = JSON.parse(event.data);
+                                value = Number(data.value);
+                                radial1.value=value
+                                radial2.value=value
+                                radial1.update();
+                                radial2.update();
+                            }
+                        });
+                    </script> 
                 </div>
                 <div class="pressure--block">
                     <h5>Total</h5>

@@ -346,7 +346,7 @@ aside {
 				0 2px 1px -1px rgba(255,255,255,.7) inset, 
 				8px 0 5px -5px #02425C inset,
 				-8px 0 5px -5px #02425C inset;
-	-moz-user-select:none; -webkit-user-select:none; 
+    user-select:none; -moz-user-select:none; -webkit-user-select:none; 
 
 	background:#80DCE9;
 }
