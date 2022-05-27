@@ -17,6 +17,7 @@ random.seed()
 
 #valve_controller = serial_controller.Controller('valve')
 #values = [600]
+sleeptime = 0.1
 tList = filetest.SimData()[0]
 pList = filetest.SimData()[1]
 Len = len(tList)
@@ -35,7 +36,6 @@ def generate_random_data() -> Iterator[str]:
     Generates random value between 0 and 100
     :return: String containing current timestamp (YYYY-mm-dd HH:MM:SS) and randomly generated data.
     """
-    sleeptime = 0.1
     sleepNum = 0.0
     j = 0
     print(Len)
@@ -43,19 +43,9 @@ def generate_random_data() -> Iterator[str]:
         logger.info("Client %s connected", ip())
         while True:
             time.sleep(sleeptime)
-            sleepNum = sleepNum + sleeptime
-            sleepNum = round(sleepNum,2)
-            tSearch = str(sleepNum)
-            pattern = re.compile(r'({})00000'.format(tSearch))
-            pValue = []
             i=0
-            print(j)
             if j < Len-1:
-                for line in tList:
-                    if pattern.search(line) != None:
-                        pValue.append(pList[i])
-                    i=i+1  
-                pValuefl=float(pValue[0])
+                pValuefl=float(pList[j])
 
             value = random.randrange(0,1000,1)
             json_data_chart = json.dumps(
