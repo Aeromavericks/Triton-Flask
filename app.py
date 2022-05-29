@@ -1,9 +1,11 @@
+import re
 from flask import Flask, render_template, request, stream_with_context, Response
 import serial_controller
 from turbo_flask import Turbo
 import threading, time, sys, random, webbrowser,json,logging
 from datetime import datetime
 from typing import Iterator
+import filetest
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
@@ -14,34 +16,50 @@ random.seed()
 #pressure_controller = serial_controller.Controller('pressure')
 
 #valve_controller = serial_controller.Controller('valve')
-values = [600]
+#values = [600]
+sleeptime = 0.1
+tList = filetest.SimData()[0]
+pList = filetest.SimData()[1]
+Len = len(tList)
+
 @app.route('/')
 def index():
     return render_template('index.html')
-
+def ip():
+    if request.headers.getlist("X-Forwarded-For"):
+        client_ip = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        client_ip = request.remote_addr or ""
+    return client_ip
 def generate_random_data() -> Iterator[str]:
     """
     Generates random value between 0 and 100
     :return: String containing current timestamp (YYYY-mm-dd HH:MM:SS) and randomly generated data.
     """
-    if request.headers.getlist("X-Forwarded-For"):
-        client_ip = request.headers.getlist("X-Forwarded-For")[0]
-    else:
-        client_ip = request.remote_addr or ""
-
+    sleepNum = 0.0
+    j = 0
+    print(Len)
     try:
-        logger.info("Client %s connected", client_ip)
+        logger.info("Client %s connected", ip())
         while True:
-            json_data = json.dumps(
+            time.sleep(sleeptime)
+            i=0
+            if j < Len-1:
+                pValuefl=float(pList[j])
+
+            value = random.randrange(0,1000,1)
+            json_data_chart = json.dumps(
                 {
-                    "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    "value": random.randrange(0,1000,1),
+                    "time": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                    "value1": pValuefl + 150,
+                    "value2": pValuefl - 150,
                 }
             )
-            yield f"data:{json_data}\n\n"
-            time.sleep(1)
+            j=j+1
+            yield f"data:{json_data_chart}\n\n"
+            
     except GeneratorExit:
-        logger.info("Client %s disconnected", client_ip)
+        logger.info("Client %s disconnected", ip())
 
 
 #@app.route('/valve_toggle/<valvename>')
@@ -50,33 +68,17 @@ def generate_random_data() -> Iterator[str]:
     #valve_controller.change_valve(valvename)
     #return {valvename:'changed'}
 
-@app.route("/chart-data")
+@app.route("/data")
 def chart_data() -> Response:
     response = Response(stream_with_context(generate_random_data()), mimetype="text/event-stream")
     response.headers["Cache-Control"] = "no-cache"
     response.headers["X-Accel-Buffering"] = "no"
     return response
 
-@app.before_first_request
-def before_first_request():
+
+#@app.before_first_request
+#def before_first_request():
     #threading.Thread(target=update_pressure).start()
-    threading.Thread(target=update_rand).start()
-
-def update_rand():
-    with app.app_context():
-        while True:
-            time.sleep(0.5)
-            print('Update send')
-            turbo.push(turbo.replace(render_template('rand.html'),'radial-gauge-1'))
-            turbo.push(turbo.replace(render_template('rand2.html'),'radial-gauge-2'))
-
-@app.context_processor
-def inject_rand():
-    press = random.randrange(0,1000,1)
-    pressStr = str(press)
-    values.append(press)
-    print(press)
-    return {'rand1': press}
 
 
 #def update_pressure():

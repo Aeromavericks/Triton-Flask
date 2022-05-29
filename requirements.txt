@@ -10,3 +10,5 @@ simple-websocket==0.5.2
 Turbo-Flask==0.8.0
 Werkzeug==2.1.2
 wsproto==1.1.0
+typing==3.7.4.3
+datetime==4.4
