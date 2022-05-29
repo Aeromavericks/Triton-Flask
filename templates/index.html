@@ -145,7 +145,7 @@
                                 colorNeedleEnd:"rgba(255, 160, 122, .9)",
                                 valueBox:"true",
                                 animationRule:"linear",
-                                animationDuration:"500",
+                                animationDuration:"100",
                                 fontValue:"Led",
                                 animatedValue:"true"
                             }
@@ -176,7 +176,7 @@
                                 colorNeedleEnd:"rgba(255, 160, 122, .9)",
                                 valueBox:"true",
                                 animationRule:"linear",
-                                animationDuration:"500",
+                                animationDuration:"100",
                                 fontValue:"Led",
                                 animatedValue:"true"
                             }
@@ -189,9 +189,10 @@
 
                             source.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
-                                value = Number(data.value);
-                                radial1.value=value
-                                radial2.value=value
+                                value1 = Number(data.value1);
+                                value2 = Number(data.value2);
+                                radial1.value=value1
+                                radial2.value=value2
                                 radial1.update();
                                 radial2.update();
                             }
@@ -218,14 +219,29 @@
                                 data: {
                                     labels: Array(30).fill("0000-00-00 00:00:00"),
                                     datasets: [{
-                                        label: "Random Dataset",
-                                        backgroundColor: 'rgb(255, 99, 132)',
-                                        borderColor: 'rgb(255, 99, 132)',
+                                        label: "Random Dataset Upper Limit",
+                                        borderWidth: 3,
+                                        radius: 0,
+                                        backgroundColor: 'rgba(37, 138, 17, 0.3)',
+                                        borderColor: 'rgba(250, 21, 5, 0.3)',
                                         data: Array(30).fill(null),
-                                        fill: false,
+                                        fill: 1,
+                                        tension: 0.3,
+                                    },
+                                    {
+                                        label: "Random Dataset Lower Limit",
+                                        borderWidth: 1,
+                                        radius: 0,
+                                        backgroundColor: 'rgba(37, 138, 17, 0.3)',
+                                        borderColor: 'rgba(37, 138, 17, 0.3)',
+                                        data: Array(30).fill(null),
+                                        tension: 0.3,
                                     }],
                                 },
                                 options: {
+                                    animation: {
+                                        duration: '100'
+                                    },
                                     plugins: {
                                         responsive: true,
                                         title: {
@@ -261,7 +277,6 @@
                             const context = document.getElementById('myChart').getContext('2d');
                     
                             const lineChart = new Chart(context, config);
-                    
                             const source = new EventSource("/data");
                     
                             source.onmessage = function (event) {
@@ -269,9 +284,11 @@
                                 if (config.data.labels.length === 30) {
                                     config.data.labels.shift();
                                     config.data.datasets[0].data.shift();
+                                    config.data.datasets[1].data.shift();
                                 }
                                 config.data.labels.push(data.time);
-                                config.data.datasets[0].data.push(data.value);
+                                config.data.datasets[0].data.push(data.value1);
+                                config.data.datasets[1].data.push(data.value2);
                                 lineChart.update();
                             }
                         });
