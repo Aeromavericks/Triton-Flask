@@ -12,12 +12,12 @@ import filetest
 logging.basicConfig(stream=sys.stdout, level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
+app = Flask(__name__) 
 turbo = Turbo(app)
 random.seed()
-#pressure_controller = serial_controller.Controller('pressure')
+pressure_controller = serial_controller.Controller('pressure')
 
-#valve_controller = serial_controller.Controller('valve')
+valve_controller = serial_controller.Controller('valve')
 #values = [600]
 sleeptime = 0.1
 tList = filetest.SimData()[0]
@@ -64,11 +64,11 @@ def generate_random_data() -> Iterator[str]:
         logger.info("Client %s disconnected", ip())
 
 
-#@app.route('/valve_toggle/<valvename>')
-#def valve_toggle(valvename):
+@app.route('/valve_toggle/<valvename>')
+def valve_toggle(valvename):
     #call change valve here
-    #valve_controller.change_valve(valvename)
-    #return {valvename:'changed'}
+    valve_controller.change_valve(valvename)
+    return {valvename:'changed'}
 
 @app.route("/data")
 def chart_data() -> Response:
@@ -78,27 +78,27 @@ def chart_data() -> Response:
     return response
 
 
-#@app.before_first_request
-#def before_first_request():
-    #threading.Thread(target=update_pressure).start()
+@app.before_first_request
+def before_first_request():
+    threading.Thread(target=update_pressure).start()
 
 
-#def update_pressure():
-    #with app.app_context():
-        #while True:
-            #time.sleep(0.5)
-            #print('Update send')
-            #turbo.push(turbo.replace(render_template('loadavg.html'), 'pressure'))
+def update_pressure():
+    with app.app_context():
+        while True:
+            time.sleep(0.5)
+            print('Update send')
+            turbo.push(turbo.replace(render_template('loadavg.html'), 'pressure'))
 
-#@app.context_processor
-#def inject_load():
-#    pressures = pressure_controller.get_p()
-#    print(pressures)
-#    return {'load1': pressures[0], 'load5': pressures[1], 'load15': pressures[2]}
+@app.context_processor
+def inject_load():
+    pressures = pressure_controller.get_p()
+    print(pressures)
+    return {'load1': pressures[0], 'load5': pressures[1], 'load15': pressures[2]}
 
 if __name__ == '__main__':
-#    pressure_controller.connect()
-#    valve_controller.connect()
+    pressure_controller.connect()
+    valve_controller.connect()
     
     app.run(host='0.0.0.0', debug=True,threaded=True)
     
