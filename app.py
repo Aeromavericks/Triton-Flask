@@ -53,8 +53,8 @@ def generate_random_data() -> Iterator[str]:
             json_data_chart = json.dumps(
                 {
                     "time": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                    "value1": 150,
-                    "value2": 250,
+                    "value1": PA1,
+                    "value2": PA2,
                 }
             )
             j=j+1
