@@ -50,6 +50,7 @@ def generate_random_data() -> Iterator[str]:
                 pValuefl=float(pList[j])
 
             value = random.randrange(0,1000,1)
+            pressures = pressure_controller.get_p()
             json_data_chart = json.dumps(
                 {
                     "time": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
