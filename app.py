@@ -49,7 +49,7 @@ def generate_random_data() -> Iterator[str]:
             if j < Len-1:
                 pValuefl=float(pList[j])
 
-            value = random.randrange(0,1000,1)
+            
             pressures = pressure_controller.get_p()
             json_data_chart = json.dumps(
                 {
@@ -64,7 +64,6 @@ def generate_random_data() -> Iterator[str]:
     except GeneratorExit:
         logger.info("Client %s disconnected", ip())
 
-
 @app.route('/valve_toggle/<valvename>')
 def valve_toggle(valvename):
     #call change valve here
@@ -78,28 +77,8 @@ def chart_data() -> Response:
     response.headers["X-Accel-Buffering"] = "no"
     return response
 
-
-@app.before_first_request
-def before_first_request():
-    threading.Thread(target=update_pressure).start()
-
-
-def update_pressure():
-    with app.app_context():
-        while True:
-            time.sleep(0.5)
-            print('Update send')
-            turbo.push(turbo.replace(render_template('loadavg.html'), 'pressure'))
-
-@app.context_processor
-def inject_load():
-    pressures = pressure_controller.get_p()
-    print(pressures)
-    return {'load1': pressures[0], 'load5': pressures[1], 'load15': pressures[2]}
-
 if __name__ == '__main__':
     pressure_controller.connect()
     valve_controller.connect()
     
     app.run(host='0.0.0.0', debug=True,threaded=True)
-    

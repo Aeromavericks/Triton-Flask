@@ -1,5 +1,8 @@
 import serial
 import serial.tools.list_ports 
+import numpy as np
+import time
+
 
 class Controller():
     def __init__(self, typeof_mc):
@@ -48,6 +51,18 @@ class Controller():
         pressures = self.ser.readline().decode().strip().split(',')
 
         return pressures
+    
+#    def get_p_avg(self):
+ #       pressures = []
+
+  #      for i in range(10):
+   #         pressures.append(self.get_p())
+    #        time.delay(0.1)
+
+     #   pressures = np.array(pressures)
+      #  avg = np.average(pressures, axis=0)
+
+       # return avg 
     
     def change_valve(self, valve):
 
