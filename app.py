@@ -7,6 +7,8 @@ from datetime import datetime
 from typing import Iterator
 import filetest
 
+# This is the change I made
+
 logging.basicConfig(stream=sys.stdout, level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
 
