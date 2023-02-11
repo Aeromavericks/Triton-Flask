@@ -54,7 +54,7 @@ def generate_random_data() -> Iterator[str]:
                 {
                     "time": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                     "value1": 150,
-                    "value2": pValuefl - 150,
+                    "value2": 250,
                 }
             )
             j=j+1
