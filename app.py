@@ -19,35 +19,18 @@ def index():
     return render_template('index.html')
 
 def generate_random_data() -> Iterator[str]:
-    """
-    Generates random value between 0 and 100
-    :return: String containing current timestamp (YYYY-mm-dd HH:MM:SS) and randomly generated data.
-    """
-    sleepNum = 0.0
-    j = 0
-    print(Len)
-    try:
-        logger.info("Client %s connected", ip())
-        while True:
-            time.sleep(sleeptime)
-            i=0
-            if j < Len-1:
-                pValuefl=float(pList[j])
-
-            
-            pressures = pressure_controller.get_p()
-            json_data_chart = json.dumps(
-                {
-                    "time": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                    "value1": int(pressures[1]),
-                    "value2": int(pressures[2]),
-                }
+    while True:
+        pressures = pressure_controller.get_p()
+        json_data_chart = json.dumps(
+            {
+                "time": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                "value1": int(pressures[1]),
+                "value2": int(pressures[2]),
+            }
             )
-            j=j+1
-            yield f"data:{json_data_chart}\n\n"
+        j=j+1
+        yield f"data:{json_data_chart}\n\n"
             
-    except GeneratorExit:
-        logger.info("Client %s disconnected", ip())
 
 @app.route('/valve_toggle/<valvename>')
 def valve_toggle(valvename):
