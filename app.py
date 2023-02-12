@@ -1,10 +1,8 @@
-import re
 from flask import Flask, render_template, request, stream_with_context, Response
 import serial_controller
 import threading, time, sys, random, webbrowser,json,logging
 from datetime import datetime
 from typing import Iterator
-import filetest
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
@@ -14,21 +12,12 @@ pressure_controller = serial_controller.Controller('pressure')
 
 valve_controller = serial_controller.Controller('valve')
 sleeptime = 0.1
-tList = filetest.SimData()[0]
-pList = filetest.SimData()[1]
-Len = len(tList)
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-def ip():
-    if request.headers.getlist("X-Forwarded-For"):
-        client_ip = request.headers.getlist("X-Forwarded-For")[0]
-    else:
-        client_ip = request.remote_addr or ""
-    return client_ip
-    
 def generate_random_data() -> Iterator[str]:
     """
     Generates random value between 0 and 100
