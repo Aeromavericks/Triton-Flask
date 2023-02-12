@@ -1,11 +1,10 @@
-from flask import Flask, render_template, request, stream_with_context, Response
+from flask import Flask, render_template, stream_with_context, Response
 import serial_controller
-import threading, time,json
+import time,json
 from datetime import datetime
 from typing import Iterator
 
 pressure_controller = serial_controller.Controller('pressure')
-
 valve_controller = serial_controller.Controller('valve')
 
 @app.route('/')
@@ -41,4 +40,4 @@ if __name__ == '__main__':
     pressure_controller.connect()
     valve_controller.connect()
     
-    app.run(host='0.0.0.0', debug=True,threaded=True)
+    app.run(host='0.0.0.0', debug=True)
