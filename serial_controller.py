@@ -45,6 +45,7 @@ class Controller():
         self.ser = serial.Serial(port)
 
     def get_p(self):
+
         if self.typeof_mc != 'P':
             return 'Error'
 
@@ -52,17 +53,18 @@ class Controller():
 
         return pressures
     
-#    def get_p_avg(self):
- #       pressures = []
+    def get_p_avg(self):
 
-  #      for i in range(10):
-   #         pressures.append(self.get_p())
-    #        time.delay(0.1)
+        pressures = []
+       
+        for i in range(10):
+            pressures.append(self.get_p())
+            time.delay(0.1)
+            
+        pressures = np.array(pressures)
+        avg = np.average(pressures, axis=0)
 
-     #   pressures = np.array(pressures)
-      #  avg = np.average(pressures, axis=0)
-
-       # return avg 
+        return avg 
     
     def change_valve(self, valve):
 
