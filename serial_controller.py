@@ -19,6 +19,8 @@ class Controller():
             self.valve6state = False
         
         self.ser = None
+        filename = time.time()
+        self.logfile = open("demo/"+filename, 'w')
 
     def connect(self):
         ports = list(serial.tools.list_ports.comports())
