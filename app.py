@@ -4,6 +4,8 @@ import time,json
 from datetime import datetime
 from typing import Iterator
 
+app = Flask(__name__) 
+
 pressure_controller = serial_controller.Controller('pressure')
 valve_controller = serial_controller.Controller('valve')
 
