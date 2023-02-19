@@ -51,7 +51,7 @@ class Controller():
         if self.ser != None:
             pressures = self.ser.readline().decode().strip().split(',')
         else:
-            pressures = ['P', '0', '0','0', '0','0', '0','0', '0','0', '0']
+            pressures = ['P','0','0','0','0','0','0','0','0','0','0']
             print("Pressure mc not connected")
 
         return pressures
