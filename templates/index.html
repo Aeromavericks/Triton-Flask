@@ -143,6 +143,8 @@
                                 colorNeedleStart:"rgba(240, 128, 128, 1)",
                                 colorNeedleEnd:"rgba(255, 160, 122, .9)",
                                 valueBox:"true",
+                                valueInt: "4",
+                                valueDec: "0",
                                 animationRule:"linear",
                                 animationDuration:"100",
                                 fontValue:"Led",
@@ -175,7 +177,7 @@
                                 colorNeedleEnd:"rgba(255, 160, 122, .9)",
                                 valueBox:"true",
                                 animationRule:"linear",
-                                animationDuration:"100",
+                                animationDuration:"500",
                                 fontValue:"Led",
                                 animatedValue:"true"
                             }
@@ -218,17 +220,17 @@
                                 data: {
                                     labels: Array(30).fill("0000-00-00 00:00:00"),
                                     datasets: [{
-                                        label: "Random Dataset Upper Limit",
+                                        label: "Pressure Upper Limit",
                                         borderWidth: 3,
                                         radius: 0,
                                         backgroundColor: 'rgba(37, 138, 17, 0.3)',
                                         borderColor: 'rgba(250, 21, 5, 0.3)',
-                                        data: Array(30).fill(null),
+                                        data: Array(30).fill(null), 
                                         fill: 1,
                                         tension: 0.3,
                                     },
                                     {
-                                        label: "Random Dataset Lower Limit",
+                                        label: "Pressure Lower Limit",
                                         borderWidth: 1,
                                         radius: 0,
                                         backgroundColor: 'rgba(37, 138, 17, 0.3)',
@@ -245,7 +247,7 @@
                                         responsive: true,
                                         title: {
                                             display: true,
-                                            text: 'Creating Real-Time Charts with Flask'
+                                            text: 'Pressure Time History'
                                         },
                                         tooltips: {
                                             mode: 'index',
@@ -264,6 +266,8 @@
                                                 }
                                             }],
                                             yAxes: [{
+                                                min: 0,
+                                                max: 4000,
                                                 scaleLabel: {
                                                     labelString: 'Value'
                                                 }
@@ -280,10 +284,10 @@
                     
                             source.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
-                                if (config.data.labels.length === 30) {
+                                   if (config.data.labels.length === 30) {
                                     config.data.labels.shift();
                                     config.data.datasets[0].data.shift();
-                                    config.data.datasets[1].data.shift();
+                                    config.data.datasets[1].data.shift(); 
                                 }
                                 config.data.labels.push(data.time);
                                 config.data.datasets[0].data.push(data.value1);
