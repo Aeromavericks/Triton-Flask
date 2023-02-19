@@ -5,13 +5,13 @@ import time
 
 
 class Controller():
-    def __init__(self, typeof_mc):
-        if typeof_mc.lower() == 'pressure':
-            self.typeof_mc = 'P'
+    def __init__(self, typeof_mc): 
+        if typeof_mc.lower() == 'pressure': 
+            self.typeof_mc = 'P' 
         
         else:
-            self.typeof_mc = 'V'
-            self.valve1state = False
+            self.typeof_mc = 'V' 
+            self.valve1state = False 
             self.valve2state = False
             self.valve3state = False
             self.valve4state = False
@@ -32,29 +32,29 @@ class Controller():
         port = ''
 
         for x in maple_ports:
-            tmp = serial.Serial(x.device)
-            tmp.reset_input_buffer()
-            mode = ''
-            while len(mode) != 1:
-                mode = tmp.readline().decode().split(',')[0]
+            tmp = serial.Serial(x.device) # open serial port
+            tmp.reset_input_buffer() # clear buffer
+            mode = '' # read mode
+            while len(mode) != 1: # wait for mode to be read
+                mode = tmp.readline().decode().split(',')[0] # read mode
                 print(mode)
             if mode == self.typeof_mc:
                 port = x.device 
-            tmp.close()
+            tmp.close() # close serial port
         
         self.ser = serial.Serial(port)
 
-    def get_p(self):
+    def get_p(self): 
         if self.typeof_mc != 'P':
             return 'Error'
 
-        if self.ser != None:
-            pressures = self.ser.readline().decode().strip().split(',')
-        else:
-            pressures = ['P','0','0','0','0','0','0','0','0','0','0']
+        if self.ser != None: # if serial port is open
+            pressures = self.ser.readline().decode().strip().split(',') # read pressure data
+        else: # if serial port is not open
+            pressures = ['P','0','0','0','0','0','0','0','0','0','0'] # return 0
             print("Pressure mc not connected")
 
-        return pressures
+        return pressures # returns list of pressures
     
 #    def get_p_avg(self):
  #       pressures = []
