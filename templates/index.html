@@ -284,15 +284,13 @@
                     
                             source.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
-                                   if (config.data.labels.length === 30) {
-                                    config.data.labels.shift();
-                                    config.data.datasets[0].data.shift();
-                                    config.data.datasets[1].data.shift(); 
-                                }
+                                   
+
+
                                 config.data.labels.push(data.time);
                                 config.data.datasets[0].data.push(data.value1);
                                 config.data.datasets[1].data.push(data.value2);
-                                lineChart.update();
+                                lineChart.update('quiet');
                             }
                         });
                     </script>
