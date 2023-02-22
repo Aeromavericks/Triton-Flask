@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Iterator
 
 app = Flask(__name__) 
-
+#
 pressure_controller = serial_controller.Controller('pressure') # create pressure controller
 valve_controller = serial_controller.Controller('valve') # create valve controller
 
@@ -26,7 +26,7 @@ def pressure_data_source() -> Iterator[str]: # function to send data to client
         yield f"data:{json_data_chart}\n\n" # send data to client
             
 
-@app.route('/valve_toggle/<valvename>')
+@app.route('/valve_toggle/<valvename>') # route to toggle valve
 def valve_toggle(valvename):
     valve_controller.change_valve(valvename)
     return {valvename:'changed'}
@@ -36,10 +36,10 @@ def chart_data() -> Response: # function to send data to client
     response = Response(stream_with_context(pressure_data_source()), mimetype="text/event-stream") # send data to client
     response.headers["Cache-Control"] = "no-cache" # disable caching
     response.headers["X-Accel-Buffering"] = "no" # disable buffering
-    return response
+    return response 
 
 if __name__ == '__main__':
-    pressure_controller.connect()
-    valve_controller.connect()
+    pressure_controller.connect() # connect to serial port
+    valve_controller.connect() # connect to serial port
     
-    app.run(host='0.0.0.0', debug=True, threaded=True)
+    app.run(host='0.0.0.0', debug=True, threaded=True) # run app
