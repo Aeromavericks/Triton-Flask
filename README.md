@@ -1,5 +1,3 @@
-# Description
-
 ## [Manual in Notion](https://www.notion.so/AeroMavs-Triton-Flask-73c10addb0214e17bf424c82b9e43e5e?pvs=4)
 
 ### [Serial_Controller.py](https://www.notion.so/Serial_Controller-py-code-59923a3c92a44c968775d11b5c7b4403?pvs=4)
