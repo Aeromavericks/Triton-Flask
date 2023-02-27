@@ -72,6 +72,7 @@ class Controller():
 
         if valve == 'valve1':
             self.ser.write('A'.encode())
+            print("Reached Here")
         elif valve == 'valve2':
             self.ser.write('B'.encode())
         elif valve == 'valve3':  
