@@ -197,7 +197,7 @@ main {
 /* Main col 3 */
 .main__col--3 {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1, 1fr;
     grid-gap: 20px;
     margin: 20px 0;
     height: auto;

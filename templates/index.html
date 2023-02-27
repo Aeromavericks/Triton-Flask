@@ -212,7 +212,8 @@
                                 height:200,
                                 title:"Tank Fill",
                                 value:0,
-                                strokeTicks:false,
+                                minValue:0,
+                                maxValue:4000,
                                 valueBox:"true",
                                 valueInt: "4",
                                 valueDec: "0",
@@ -233,10 +234,14 @@
                                 const data = JSON.parse(event.data);
                                 value1 = Number(data.value1);
                                 value2 = Number(data.value2);
+                                value3 = Number(data.value3);
+                                value4 = Number(data.value4);
+                                value5 = Number(data.value5);
+                                value6 = Number(data.value6);
                                 radial1.value=value1
                                 radial2.value=value2
-                                linear1.value=value1
-                                linear2.value=value2
+                                linear1.value=value5
+                                linear2.value=value6
                                 radial1.update();
                                 radial2.update();
                                 linear1.update();

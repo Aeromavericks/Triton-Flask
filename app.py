@@ -21,6 +21,10 @@ def pressure_data_source() -> Iterator[str]: # function to send data to client
             "time": datetime.now().strftime('%Y-%m-%d %H:%M:%S'), # time
             "value1": int(pressures[1]), # pressure 1
             "value2": int(pressures[2]), # pressure 2
+            "value3": int(pressures[3]), # pressure 3
+            "value4": int(pressures[4]), # pressure 4
+            "value5": int(pressures[5]), # pressure 5
+            "value6": int(pressures[6]), # pressure 6
             })
 
         yield f"data:{json_data_chart}\n\n" # send data to client
