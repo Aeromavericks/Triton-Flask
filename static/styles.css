@@ -227,7 +227,7 @@ main {
 */  
         .gauge-column{
             grid-area: p1;
-            float: left;
+            float: inline;
         }
 /*        .pressure-2 {
             grid-area: p2;
@@ -235,7 +235,7 @@ main {
   */          
          .load-column{
                 grid-area: p2;
-                float: right;
+                float: inline;
 
             }
     .pressure--block {
