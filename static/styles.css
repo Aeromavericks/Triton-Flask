@@ -207,9 +207,9 @@ main {
 
         .container-2 {
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: auto;
         grid-template-areas: 
-        "p1 p2";
+        "p1 p2 p3 p4";
         text-align: center;
         padding: 20px 20px;
         border-radius: 7px;
@@ -225,18 +225,25 @@ main {
             grid-area: p1;
         }
 */  
-        .gauge-column{
+        .gauge-column1{
             grid-area: p1;
+            float: inline;
+        }
+        .gauge-column2{
+            grid-area: p2;
             float: inline;
         }
 /*        .pressure-2 {
             grid-area: p2;
         }
   */          
-         .load-column{
-                grid-area: p2;
+         .load-column1{
+                grid-area: p3;
                 float: inline;
-
+            }
+            .load-column2{
+                grid-area: p4;
+                float: inline;
             }
     .pressure--block {
         padding: 25px 20px;
