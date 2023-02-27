@@ -51,7 +51,11 @@ class Controller():
         if self.typeof_mc != 'P':
             return 'Error'
 
-        pressures = self.ser.readline().decode().strip().split(',')
+        if self.ser != None:
+            pressures = self.ser.readline().decode().strip().split(',')
+        else:
+            pressures = ['P', '0', '0','0', '0','0', '0','0', '0','0', '0']
+            print("Pressure mc not connected")
 
         return pressures
     
