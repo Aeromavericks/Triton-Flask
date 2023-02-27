@@ -188,7 +188,7 @@
                             }
                             const config_gauge6 = {
                                 renderTo: 'gauge6',
-                                width:400,
+                                width:200,
                                 height:100,
                                 units:"Kg",
                                 title:"Ox Tank Fill",
@@ -204,8 +204,12 @@
                 
                             var radial1 = new RadialGauge(config_gauge1);
                             var radial2 = new RadialGauge(config_gauge2);
-                            var linear1 = new LinearGuage(config_gauge6);
-
+                            var linear1 = new LinearGauge({
+                                renderTo: 'gauge6',
+                                colorNumbers: 'red',
+                                width: 100,
+                                height: 300
+                                })
                             const source = new EventSource("/data");
 
                             source.onmessage = function (event) {
