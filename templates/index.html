@@ -117,6 +117,9 @@
                     <div class="gauge-column">
                         <canvas id="gauge6" type="linear-gauge"></canvas>
                     </div>
+                    <div class="gauge-column">
+                        <canvas id="gauge7" type="linear-gauge"></canvas>
+                    </div>
                     
                     <script>
                         $(document).ready(function () { 
@@ -188,8 +191,17 @@
                             }
                             const config_gauge6 = {
                                 renderTo: 'gauge6',
-                                width:300,
-                                height:100,
+                                width:100,
+                                height:200,
+                                title:"Ox Tank Fill",
+                                value:0,
+                                strokeTicks:false,
+                                valueBox:"true",
+                            }
+                            const config_gauge7 = {
+                                renderTo: 'gauge7',
+                                width:100,
+                                height:200,
                                 title:"Ox Tank Fill",
                                 value:0,
                                 strokeTicks:false,
@@ -199,7 +211,7 @@
                             var radial1 = new RadialGauge(config_gauge1);
                             var radial2 = new RadialGauge(config_gauge2);
                             var linear1 = new LinearGauge(config_gauge6);
-
+                            var linear2 = new LinearGauge(config_gauge7);
 
                             const source = new EventSource("/data");
 
@@ -224,11 +236,14 @@
                 </div>
 
                 <div class="pressure--block">
+                    <canvas id="gauge7" type="linear-gauge"></canvas>
+                    </div>
                     <canvas data-width="100" data-type="linear-gauge"></canvas>
                     <script>
                         var gauge = new LinearGauge({renderTo: 'linear2', width: 100
                         })
                         .draw();
+                        linear2.update();
                     </script>
 
                     <span>Yo</span>
