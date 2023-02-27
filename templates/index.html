@@ -199,7 +199,7 @@
                             var radial1 = new RadialGauge(config_gauge1);
                             var radial2 = new RadialGauge(config_gauge2);
                             var linear1 = new LinearGauge(config_gauge6);
-                            var linear2 = new LinearGauge(config_gauge6);
+
 
                             const source = new EventSource("/data");
 
@@ -224,9 +224,13 @@
                 </div>
 
                 <div class="pressure--block">
-                    <div class="load-gauge">
-                        <canvas id="linear7" type="linear-gauge"></canvas>
-                    </div>
+                    <canvas data-width="100" data-type="linear-gauge"></canvas>
+                    <script>
+                        var gauge = new LinearGauge({renderTo: 'linear2', width: 100
+                        })
+                        .draw();
+                    </script>
+
                     <span>Yo</span>
                 </div>
             </div>
