@@ -199,6 +199,7 @@
                             var radial1 = new RadialGauge(config_gauge1);
                             var radial2 = new RadialGauge(config_gauge2);
                             var linear1 = new LinearGauge(config_gauge6);
+                            var linear2 = new LinearGauge(config_gauge6);
 
                             const source = new EventSource("/data");
 
@@ -207,12 +208,15 @@
                                 value1 = Number(data.value1);
                                 value2 = Number(data.value2);
                                 value6 = Number(data.value6);
+                                value7 = Number(data.value7);
                                 radial1.value=value1
                                 radial2.value=value2
                                 linear1.value=value6
+                                linear2.value=value7
                                 radial1.update();
                                 radial2.update();
                                 linear1.update();
+                                linear2.update();
 
                             }
                         });
@@ -220,6 +224,9 @@
                 </div>
 
                 <div class="pressure--block">
+                    <div class="load-gauge">
+                        <canvas id="gauge7" type="linear-gauge"></canvas>
+                    </div>
                     <span>Yo</span>
                 </div>
             </div>
