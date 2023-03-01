@@ -5,13 +5,13 @@ from datetime import datetime
 from typing import Iterator
 
 app = Flask(__name__) 
-#
-pressure_controller = serial_controller.Controller('pressure') # create pressure controller
-valve_controller = serial_controller.Controller('valve') # create valve controller
 
-@app.route('/') # main page
+pressure_controller = serial_controller.Controller('pressure')
+valve_controller = serial_controller.Controller('valve')
+
+@app.route('/')
 def index(): 
-    return render_template('index.html') # render index.html
+    return render_template('index.html')
 
 def pressure_data_source() -> Iterator[str]: # function to send data to client
     while True:

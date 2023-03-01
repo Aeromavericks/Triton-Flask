@@ -7,7 +7,8 @@ import time
 class Controller():
     def __init__(self, typeof_mc): 
         if typeof_mc.lower() == 'pressure': 
-            self.typeof_mc = 'P' 
+            self.typeof_mc = 'P'
+            self.filename = str(time.time())
         
         else:
             self.typeof_mc = 'V' 
@@ -19,9 +20,7 @@ class Controller():
             self.valve6state = False
         
         self.ser = None
-        filename = time.time()
-        self.logfile = open("demo/"+filename, 'w')
-
+        
     def connect(self):
         ports = list(serial.tools.list_ports.comports())
 
@@ -44,7 +43,7 @@ class Controller():
                 port = x.device 
             tmp.close() # close serial port
         
-        self.ser = serial.Serial(port)
+        #self.ser = serial.Serial(port)
 
     def get_p(self): 
         if self.typeof_mc != 'P':
@@ -55,6 +54,13 @@ class Controller():
         else: # if serial port is not open
             pressures = ['P','0','0','0','0','0','0','0','0','0','0'] # return 0
             print("Pressure mc not connected")
+
+        logfile = open("data/"+self.filename, 'a+') 
+        for x in pressures:
+            logfile.write(x+', ')
+
+        logfile.write('\n')
+        logfile.close()
 
         return pressures # returns list of pressures
     
