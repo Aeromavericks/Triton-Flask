@@ -8,7 +8,7 @@ const int sens_5 = PA4;
 const int sens_6 = PA5;
 const int sens_7 = PA6;
 const int sens_8 = PA7;
-const int sens_9 = PB0;
+//const int sens_9 = PB0;
 //const int sens_10 = PB1;
 
 const int CLK = PB12;
@@ -16,7 +16,7 @@ const int DOUT = PB13;
 
 HX711 scale;
 
-float calibration_factor = -7050; 
+float calibration_factor = -8440; 
 const unsigned long BAUD_RATE = 115200;
 
 void setup()
@@ -29,15 +29,16 @@ void setup()
     pinMode(sens_6, INPUT_ANALOG);
     pinMode(sens_7, INPUT_ANALOG);
     pinMode(sens_8, INPUT_ANALOG);
-    pinMode(sens_9, INPUT_ANALOG);
+    //pinMode(sens_9, INPUT_ANALOG);
     //pinMode(sens_10, INPUT_ANALOG);
 
     Serial.begin(BAUD_RATE);
 
   scale.begin(DOUT, CLK);
-  scale.set_scale();
+  scale.set_scale(); // obtained with 20lb weight
   scale.tare(); //Reset the scale to 0
 
+    long zero_factor = scale.read_average();
 }
 
 
@@ -55,12 +56,12 @@ void loop(){
     sens_5_val = analogRead(sens_5);
     sens_6_val = analogRead(sens_6);
     sens_7_val = analogRead(sens_7);
-    sens_8_val = analogRead(sens_8);
-    sens_9_val = analogRead(sens_9);
+    sens_8_val = scale.get_units(5);
+    sens_9_val = scale.read();
     sens_10_val = scale.get_value(5);
 
 char buffer[70];
-sprintf(buffer,"P, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d ",sens_1_val, sens_2_val, sens_3_val, sens_4_val, sens_5_val, sens_6_val, sens_7_val, sens_8_val, sens_9_val, sens_10_val);
+sprintf(buffer,"P, %d, %d, %d, %d, %d, %d, %d, %.2d, %d, %d ",sens_1_val, sens_2_val, sens_3_val, sens_4_val, sens_5_val, sens_6_val, sens_7_val, sens_8_val, sens_9_val, sens_10_val);
     Serial.println(buffer);
     
     delay(50);
