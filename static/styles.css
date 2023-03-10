@@ -210,11 +210,16 @@ main {
     height: auto;
 }
 
+/* Parent class */
+.parent {
+    width: 50%;
+  }
+
 /* Main col 4 */
 .main__col--4 {
     display: block;
     grid-template-columns: 1, 1fr;
-    grid-gap: 10px;
+    grid-gap: 20px;
     margin: 10px 0;
     height: auto;
 }
