@@ -199,6 +199,7 @@ main {
     display: grid; /* or display: flex; */
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
+    align-items: start;
   }
 
 /* Main col 3 */
@@ -206,7 +207,7 @@ main {
     /* display: grid; */
     /* grid-template-columns: 1fr; */
     /* grid-gap: 20px; */
-    margin: 10 px 0;
+    margin: 20 px 0;
     height: auto;
     grid-column: 1 / 2; /*Array on the left side */
 }
@@ -216,7 +217,7 @@ main {
     /* display: grid; */
     /* grid-template-columns: 1fr; */
     /* grid-gap: 20px; */
-    margin: 10px 0;
+    margin: 20px 0;
     height: auto;
     grid-column: 2 / 3; /*Array on the right side */
 }
