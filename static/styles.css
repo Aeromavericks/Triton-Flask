@@ -196,8 +196,8 @@ main {
 
 /* Parent class */
 .parent {
-    display: block; /* or display: flex; */
-    grid-template-columns: auto auto;
+    display: grid; /* or display: flex; */
+    grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
   }
 
