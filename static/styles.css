@@ -208,6 +208,7 @@ main {
     grid-gap: 20px;
     margin: 10px 0;
     height: auto;
+    grid-column: 1 / 2; /* Array on the left side */
 }
 
 /* Main col 4 */
@@ -217,6 +218,7 @@ main {
     grid-gap: 20px;
     margin: 10px 0;
     height: auto;
+    grid-column: 2 / 3; /* Array on the right side */
 }
 
 /* *******This is the container for the pressure plot******  */
