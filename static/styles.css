@@ -214,7 +214,7 @@ main {
 .main__col--4 {
     display: block;
     grid-template-columns: 1, 1fr;
-    grid-gap: 20px;
+    grid-gap: 10px;
     margin: 10px 0;
     height: auto;
 }
