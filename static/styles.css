@@ -197,7 +197,7 @@ main {
 /* Parent class */
 .parent {
     display: grid; /* or display: flex; */
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: auto auto;
     grid-gap: 20px;
   }
 
