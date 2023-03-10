@@ -197,11 +197,8 @@ main {
 /* Parent class */
 .parent {
     display: grid; /* or display: flex; */
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
     grid-gap: 20px;
-    /* margin: 10px 0;
-    height: auto; */
-
   }
 
 /* Main col 3 */
@@ -209,9 +206,9 @@ main {
     /* display: grid; */
     /* grid-template-columns: 1fr; */
     /* grid-gap: 20px; */
-    /* margin: 10px 0;
-    height: auto; */
-    grid-column: 1 / 2; /* Array on the left side */
+    margin: 10px 0;
+    height: auto;
+    /* grid-column: 1 / 2; Array on the left side */
 }
 
 /* Main col 4 */
@@ -219,9 +216,9 @@ main {
     /* display: grid; */
     /* grid-template-columns: 1fr; */
     /* grid-gap: 20px; */
-    /* margin: 10px 0;
-    height: auto; */
-    grid-column: 2 / 3; /* Array on the right side */
+    margin: 10px 0;
+    height: auto;
+    /* grid-column: 2 / 3; Array on the right side */
 }
 
 /* *******This is the container for the pressure plot******  */
