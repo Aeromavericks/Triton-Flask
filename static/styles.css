@@ -199,7 +199,7 @@ main {
     display: grid; /* or display: flex; */
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
-    margin: 20 px 0;
+    margin: 40 px 20 px 0 0;
     /* align-items: stretch; */
   }
 
