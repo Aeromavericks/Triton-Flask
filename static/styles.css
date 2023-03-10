@@ -203,6 +203,14 @@ main {
     height: auto;
 }
 
+.main__col--4 {
+    display: block;
+    grid-template-columns: 1, 1fr;
+    grid-gap: 20px;
+    margin: 10px 0;
+    height: auto;
+}
+
 /* *******This is the container for the pressure plot******  */
 
         .container-2 {
