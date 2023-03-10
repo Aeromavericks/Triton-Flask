@@ -222,6 +222,7 @@ main {
     /* margin: 20 px 0; */
     height: auto;
     grid-column: 2 / 3; /*Array on the right side */
+    align-items: start;
 }
 
 /* *******This is the container for the pressure plot******  */
