@@ -7,10 +7,9 @@
           $('#toggle').change(function(e) {
             //Prevents page refresh
             //e.preventDefault()
-            var test = $("#gaugetest");
-            console.log(test.val());
-            test.value = 100;
-            test.draw();
+            document.gauges.forEach(function(gauge) {
+                gauge.value = 100;
+    });
             name = $(this).attr("name")
 
             if ($(this).is(':checked')) {
