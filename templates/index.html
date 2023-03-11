@@ -258,31 +258,9 @@
                 
                             var radial1 = new RadialGauge(config_gauge1);
                             var radial2 = new RadialGauge(config_gauge2);
-                            var linear1 = new LinearGauge(config_gauge6);
-                            var linear2 = new LinearGauge(config_gauge7);
 
-                            const source = new EventSource("/data");
 
-                            source.onmessage = function (event) {
-                                const data = JSON.parse(event.data);
-                                value1 = Number(data.value1);
-                                value2 = Number(data.value2);
-                                value3 = Number(data.value3);
-                                value4 = Number(data.value4);
-                                value5 = Number(data.value5);
-                                value6 = Number(data.value6);
-                                radial1.value=value1
-                                radial2.value=value2
-                                linear1.value=value5
-                                linear2.value=value6
-                                radial1.update();
-                                radial2.draw();
-                                linear1.update();
-                                linear2.update();
-
-                            }
-                        });
-                    </script> 
+      </script> 
                 </div>
 
                 <div class="pressure--block">
