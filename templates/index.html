@@ -5,6 +5,9 @@
 <script type=text/javascript>
         $(function() {
           $('#toggle').change(function(e) {
+            var test $('gaugetest');
+            console.log(test);
+            console.log(test.value);
             //Prevents page refresh
             //e.preventDefault()
             name = $(this).attr("name")
@@ -124,7 +127,7 @@
                             width = 200
                             height = 200
                             units = "PSI"
-                            value = 0
+                            value = 99
                             minValue = 0
                             maxValue = 1000
                             majorTicks = "0,100,200,300,400,500,600,700,800,900,1000"
@@ -145,6 +148,7 @@
                             animationDuration = "500",
                             fontValue = "Led"
                             animatedValue = "true"
+                            id = "gaugetest"
                         ></canvas>
                     </div>
                     
