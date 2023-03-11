@@ -7,7 +7,10 @@
           $('#toggle').change(function(e) {
             //Prevents page refresh
             //e.preventDefault()
-            var test = $(#gaugetest);
+            var test = document.gauges;
+            document.gauges.forEach(function (gauge) {
+    console.log(gauge.type);
+});
             console.log(test);
             console.log(test.value);
             name = $(this).attr("name")
