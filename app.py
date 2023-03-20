@@ -1,13 +1,25 @@
 from flask import Flask, render_template, stream_with_context, Response
 import serial_controller
+import serial_controllerStub
 import time,json
 from datetime import datetime
 from typing import Iterator
+import sys
 
 app = Flask(__name__) 
-#
-pressure_controller = serial_controller.Controller('pressure') # create pressure controller
-valve_controller = serial_controller.Controller('valve') # create valve controller
+
+pressure_controller = None
+valve_controller = None
+
+def initializeSerialControllers() -> None:
+    global pressure_controller, valve_controller
+    pressure_controller = serial_controller.Controller('pressure')
+    valve_controller = serial_controller.Controller('valve')
+
+def initializeSerialControllerStubs() -> None:
+    global pressure_controller, valve_controller
+    pressure_controller = serial_controllerStub.Controller('pressure')
+    valve_controller = serial_controllerStub.Controller('valve')
 
 @app.route('/') # main page
 def index(): 
@@ -42,8 +54,18 @@ def chart_data() -> Response: # function to send data to client
     response.headers["X-Accel-Buffering"] = "no" # disable buffering
     return response 
 
+@app.route("/pressure_data")
+def pressure_data():
+    return {"P1": 78, "P2": 1}
+
+
 if __name__ == '__main__':
+    
+    if len(sys.argv) > 1 and sys.argv[1].upper() == 'DEBUG':
+        initializeSerialControllerStubs()
+    else:
+        initializeSerialControllers()
+
     pressure_controller.connect() # connect to serial port
     valve_controller.connect() # connect to serial port
-    
-    app.run(host='0.0.0.0', debug=True, threaded=True) # run app
+    app.run(host='0.0.0.0', threaded=True) # run app

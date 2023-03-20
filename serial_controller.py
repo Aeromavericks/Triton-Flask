@@ -56,23 +56,10 @@ class Controller():
 
         return pressures # returns list of pressures
     
-#    def get_p_avg(self):
- #       pressures = []
-
-  #      for i in range(10):
-   #         pressures.append(self.get_p())
-    #        time.delay(0.1)
-
-     #   pressures = np.array(pressures)
-      #  avg = np.average(pressures, axis=0)
-
-       # return avg 
-    
     def change_valve(self, valve):
 
         if valve == 'valve1':
             self.ser.write('A'.encode())
-            print("Reached Here")
         elif valve == 'valve2':
             self.ser.write('B'.encode())
         elif valve == 'valve3':  
