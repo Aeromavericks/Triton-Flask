@@ -12,6 +12,7 @@
     <script src="../static/canvas-gauges/gauge.min.js"></script>
     <script src='../static/chart.min.js'></script>
     <script type="text/javascript" src="../static/valve.js"></script>
+    <script> init();</script>
 
 <title>AeroMavs TestFire</title>
 </head>
@@ -97,7 +98,7 @@
                                 data-min-value = "0"
                                 data-max-value = "1000"
                                 data-major-ticks = "0,100,200,300,400,500,600,700,800,900,1000"
-                                minorTicks = 2
+                                data-minor-ticks = 2
                                 strokeTicks =false
                                 colorPlate = "#222"
                                 colorMajorTicks = "#f5f5f5"
@@ -134,10 +135,10 @@
                                 height = 200
                                 units = "PSI"
                                 data-value = "0"
-                                data-minValue = "0"
-                                data-maxValue = "1000"
-                                majorTicks = "0,100,200,300,400,500,600,700,800,900,1000"
-                                minorTicks = 2
+                                data-min-value = "0"
+                                data-max-value = "1000"
+                                data-major-ticks = "0,100,200,300,400,500,600,700,800,900,1000"
+                                data-minor-ticks = 2
                                 strokeTicks =false
                                 colorPlate = "#222"
                                 colorMajorTicks = "#f5f5f5"
@@ -146,18 +147,18 @@
                                 colorUnits = "#ccc"
                                 colorNumbers = "#eee" 
                                 data-highlights='[
-                { "from": 0, "to": 50, "color": "rgba(0,255,0,.15)" },
-                { "from": 50, "to": 100, "color": "rgba(255,255,0,.15)" },
-                { "from": 100, "to": 150, "color": "rgba(255,30,0,.25)" },
-                { "from": 150, "to": 200, "color": "rgba(255,0,225,.25)" },
-                { "from": 200, "to": 220, "color": "rgba(0,0,255,.25)" }
+                { "from": 0, "to": 200, "color": "rgba(0,255,0,.15)" },
+                { "from": 200, "to": 400, "color": "rgba(255,255,0,.15)" },
+                { "from": 400, "to": 600, "color": "rgba(255,30,0,.25)" },
+                { "from": 600, "to": 800, "color": "rgba(255,0,225,.25)" },
+                { "from": 800, "to": 1000, "color": "rgba(0,0,255,.25)" }
             ]'
     
                                 colorNeedleStart = "rgba(240, 128, 128, 1)"
                                 colorNeedleEnd = "rgba(255, 160, 122, .9)"
                                 valueBox = "true"
                                 valueInt =  "4"
-                                valueDec = "0"
+                                valueDec = "2"
                                 animationRule = "linear"
                                 animationDuration = "100",
                                 fontValue = "Led"

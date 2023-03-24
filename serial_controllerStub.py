@@ -1,3 +1,5 @@
+import random
+
 class Controller():
     def __init__(self, typeof_mc): 
         if typeof_mc.lower() == 'pressure': 
@@ -13,7 +15,7 @@ class Controller():
             self.valve6state = False
         
         self.ser = None
-        self.pressure = '200'
+        self.pressure = 200
 
     def connect(self):
         self.ser = 'connected'
@@ -23,6 +25,7 @@ class Controller():
             return 'Error'
 
         if self.ser != None:
+            self.pressure = random.randrange(0, 200)
             pressures = [
                 'P',
                 self.pressure,
