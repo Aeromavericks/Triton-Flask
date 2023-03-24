@@ -1,38 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type=text/javascript>
-        $(function() {
-          $('#toggle').change(function(e) {
-            //Prevents page refresh
-            //e.preventDefault()
-            name = $(this).attr("name")
-
-            if ($(this).is(':checked')) {
-              console.log('Calling function to turn on '+name)
-            }
-            else{
-              console.log('Calling function to turn off '+name)
-            }
-            
-            $.getJSON('/valve_toggle/'+name,
-                function(data) {
-              console.log(data);
-              console.log('Test');
-            });
-            return false;
-          });
-        });
-</script>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../static/styles.css">
-    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 
+    <link rel="stylesheet" type="text/css" href="../static/styles/styles.css">
+    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='styles/styles.css') }}">
     <link rel="stylesheet" href="../static/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../static/canvas-gauges/gauge.min.js"></script>
     <script src='../static/chart.min.js'></script>
+    <script type="text/javascript" src="../static/valve.js"></script>
+    <script> init();</script>
+
 <title>AeroMavs TestFire</title>
 </head>
 
@@ -105,12 +86,86 @@
 
             <div class="main__col--3">
     
-                <div class="container-2" onload="update_values();">
+                <div class="container-2">
                     <div class="gauge-column"> 
-                        <canvas id="gauge1" type="radial-gauge"></canvas>
+                        <div class="gauge-column">
+                            <canvas 
+                                data-type="radial-gauge"
+                                width = 200
+                                height = 200
+                                units = "PSI"
+                                data-value = "0"
+                                data-min-value = "0"
+                                data-max-value = "1000"
+                                data-major-ticks = "0,100,200,300,400,500,600,700,800,900,1000"
+                                data-minor-ticks = 2
+                                strokeTicks =false
+                                colorPlate = "#222"
+                                colorMajorTicks = "#f5f5f5"
+                                colorMinorTicks = "#ddd"
+                                colorTitle = "#fff"
+                                colorUnits = "#ccc"
+                                colorNumbers = "#eee" 
+                                data-highlights='[
+                { "from": 0, "to": 200, "color": "rgba(0,255,0,.15)" },
+                { "from": 200, "to": 400, "color": "rgba(255,255,0,.15)" },
+                { "from": 400, "to": 600, "color": "rgba(255,30,0,.25)" },
+                { "from": 600, "to": 800, "color": "rgba(255,0,225,.25)" },
+                { "from": 800, "to": 1000, "color": "rgba(0,0,255,.25)" }
+            ]'
+    
+                                colorNeedleStart = "rgba(240, 128, 128, 1)"
+                                colorNeedleEnd = "rgba(255, 160, 122, .9)"
+                                valueBox = "true"
+                                valueInt =  "4"
+                                valueDec = "2"
+                                animationRule = "linear"
+                                animationDuration = "100",
+                                fontValue = "Led"
+                                animatedValue = "true"
+                                id = "gauge1"
+                            ></canvas>
+                        </div>
                     </div>
                     <div class="gauge-column">
-                        <canvas id="gauge2" type="radial-gauge"></canvas>
+                        <div class="gauge-column">
+                            <canvas 
+                                data-type="radial-gauge"
+                                width = 200
+                                height = 200
+                                units = "PSI"
+                                data-value = "0"
+                                data-min-value = "0"
+                                data-max-value = "1000"
+                                data-major-ticks = "0,100,200,300,400,500,600,700,800,900,1000"
+                                data-minor-ticks = 2
+                                strokeTicks =false
+                                colorPlate = "#222"
+                                colorMajorTicks = "#f5f5f5"
+                                colorMinorTicks = "#ddd"
+                                colorTitle = "#fff"
+                                colorUnits = "#ccc"
+                                colorNumbers = "#eee" 
+                                data-highlights='[
+                { "from": 0, "to": 200, "color": "rgba(0,255,0,.15)" },
+                { "from": 200, "to": 400, "color": "rgba(255,255,0,.15)" },
+                { "from": 400, "to": 600, "color": "rgba(255,30,0,.25)" },
+                { "from": 600, "to": 800, "color": "rgba(255,0,225,.25)" },
+                { "from": 800, "to": 1000, "color": "rgba(0,0,255,.25)" }
+            ]'
+    
+                                colorNeedleStart = "rgba(240, 128, 128, 1)"
+                                colorNeedleEnd = "rgba(255, 160, 122, .9)"
+                                valueBox = "true"
+                                valueInt =  "4"
+                                valueDec = "2"
+                                animationRule = "linear"
+                                animationDuration = "100",
+                                fontValue = "Led"
+                                animatedValue = "true"
+                                id = "gauge2"
+                            ></canvas>
+                        </div>
                     </div>
                     <div class="load-column">
                         <canvas id="gauge6" type="linear-gauge"></canvas>
@@ -118,136 +173,6 @@
                     <div class="load-column">
                         <canvas id="gauge7" type="linear-gauge"></canvas>
                     </div>
-                    
-                    <script>
-                        $(document).ready(function () { 
-                            const config_gauge1 = {
-                                renderTo: 'gauge1',
-                                width:200,
-                                height:200,
-                                units:"PSI",
-                                title:"P1",
-                                value:0,
-                                minValue:0,
-                                maxValue:1000,
-                                majorTicks:["0","100","200","300","400","500","600","700","800","900","1000"],
-                                minorTicks:2,
-                                strokeTicks:false,
-                                highlights:[
-                                    { "from": 0, "to": 600, "color": "rgba(0,255,0,.15)" },
-                                    { "from": 600, "to": 700, "color": "rgba(255,255,0,.15)" },
-                                    { "from": 700, "to": 1000, "color": "rgba(255,30,0,.25)" }
-                                ],
-                                colorPlate:"#222",
-                                colorMajorTicks:"#f5f5f5",
-                                colorMinorTicks:"#ddd",
-                                colorTitle:"#fff",
-                                colorUnits:"#ccc",
-                                colorNumbers:"#eee",
-                                colorNeedleStart:"rgba(240, 128, 128, 1)",
-                                colorNeedleEnd:"rgba(255, 160, 122, .9)",
-                                valueBox:"true",
-                                valueInt: "4",
-                                valueDec: "0",
-                                animationRule:"linear",
-                                animationDuration:"100",
-                                fontValue:"Led",
-                                animatedValue:"true"
-                            }
-                            const config_gauge2 = {
-                                renderTo: 'gauge2',
-                                width:200,
-                                height:200,
-                                units:"PSI",
-                                title:"P2",
-                                value:0,
-                                minValue:0,
-                                maxValue:1000,
-                                majorTicks:["0","100","200","300","400","500","600","700","800","900","1000"],
-                                minorTicks:2,
-                                strokeTicks:false,
-                                highlights:[
-                                    { "from": 0, "to": 600, "color": "rgba(0,255,0,.15)" },
-                                    { "from": 600, "to": 700, "color": "rgba(255,255,0,.15)" },
-                                    { "from": 700, "to": 1000, "color": "rgba(255,30,0,.25)" }
-                                ],
-                                colorPlate:"#222",
-                                colorMajorTicks:"#f5f5f5",
-                                colorMinorTicks:"#ddd",
-                                colorTitle:"#fff",
-                                colorUnits:"#ccc",
-                                colorNumbers:"#eee",
-                                colorNeedleStart:"rgba(240, 128, 128, 1)",
-                                colorNeedleEnd:"rgba(255, 160, 122, .9)",
-                                valueBox:"true",
-                                valueInt: "4",
-                                valueDec: "0",
-                                animationRule:"linear",
-                                animationDuration:"500",
-                                fontValue:"Led",
-                                animatedValue:"true"
-                            }
-                            const config_gauge6 = {
-                                renderTo: 'gauge6',
-                                width:100,
-                                height:200,
-                                title:"Ox Tank Fill",
-                                value:0,
-                                minValue:0,
-                                maxValue:4000,
-                                strokeTicks:false,
-                                valueBox:"true",
-                                valueInt: "4",
-                                valueDec: "0",
-                                animationRule:"linear",
-                                animationDuration:"500",
-                                fontValue:"Led",
-                                animatedValue:"true"
-                            }
-                            const config_gauge7 = {
-                                renderTo: 'gauge7',
-                                width:100,
-                                height:200,
-                                title:"Tank Fill",
-                                value:0,
-                                minValue:0,
-                                maxValue:4000,
-                                valueBox:"true",
-                                valueInt: "4",
-                                valueDec: "0",
-                                animationRule:"linear",
-                                animationDuration:"500",
-                                fontValue:"Led",
-                                animatedValue:"true"
-                            }
-                
-                            var radial1 = new RadialGauge(config_gauge1);
-                            var radial2 = new RadialGauge(config_gauge2);
-                            var linear1 = new LinearGauge(config_gauge6);
-                            var linear2 = new LinearGauge(config_gauge7);
-
-                            const source = new EventSource("/data");
-
-                            source.onmessage = function (event) {
-                                const data = JSON.parse(event.data);
-                                value1 = Number(data.value1);
-                                value2 = Number(data.value2);
-                                value3 = Number(data.value3);
-                                value4 = Number(data.value4);
-                                value5 = Number(data.value5);
-                                value6 = Number(data.value6);
-                                radial1.value=value1
-                                radial2.value=value2
-                                linear1.value=value5
-                                linear2.value=value6
-                                radial1.update();
-                                radial2.update();
-                                linear1.update();
-                                linear2.update();
-
-                            }
-                        });
-                    </script> 
                 </div>
 
                 <div class="pressure--block">
@@ -279,7 +204,7 @@
 
                     <div class='checkboxGroup'>
                         <label class='checkboxControl'>
-                            <input type="checkbox" value="None" id="toggle" name="valve1" />
+                            <input type="checkbox" value="None" id="toggle" name="valve1" onclick="valveCheckboxHandler(this)"/>
                             <div>ΟΙ</div><b></b>
                             <span class='indicator'></span>
                             <span class='indicatorOff'></span>
@@ -297,7 +222,7 @@
 
                     <div class='checkboxGroup'>
                         <label class='checkboxControl'>
-                            <input type="checkbox" value="None" id="toggle" name="valve2" />
+                            <input type="checkbox" value="None" id="toggle" name="valve2" onclick="valveCheckboxHandler(this)"/>
                             <div>ΟΙ</div><b></b>
                             <span class='indicator'></span>
                             <span class='indicatorOff'></span>
@@ -315,7 +240,7 @@
              
                         <div class='checkboxGroup'>
                             <label class='checkboxControl'>
-                                <input type="checkbox" value="None" id="toggle" name="valve3" />
+                                <input type="checkbox" value="None" id="toggle" name="valve3" onclick="valveCheckboxHandler(this)"/>
                                 <div>ΟΙ</div><b></b>
                                 <span class='indicator'></span>
                                 <span class='indicatorOff'></span>
@@ -333,7 +258,7 @@
                     
                     <div class='checkboxGroup'>
                         <label class='checkboxControl'>
-                            <input type="checkbox" value="None" id="toggle" name="valve4" />
+                            <input type="checkbox" value="None" id="toggle" name="valve4" onclick="valveCheckboxHandler(this)"/>
                             <div>ΟΙ</div><b></b>
                             <span class='indicator'></span>
                             <span class='indicatorOff'></span>
@@ -352,7 +277,7 @@
              
                         <div class='checkboxGroup'>
                             <label class='checkboxControl'>
-                                <input type="checkbox" value="None" id="toggle" name="valve5" />
+                                <input type="checkbox" value="None" id="toggle" name="valve5" onclick="valveCheckboxHandler(this)"/>
                                 <div>ΟΙ</div><b></b>
                                 <span class='indicator'></span>
                                 <span class='indicatorOff'></span>
@@ -365,7 +290,6 @@
             </div>
         </aside>
     </div>
-
 
 </body>
 </html>
