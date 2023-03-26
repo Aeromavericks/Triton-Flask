@@ -32,15 +32,15 @@ class Controller():
         port = ''
 
         for x in maple_ports:
-            tmp = serial.Serial(x.device) # open serial port
-            tmp.reset_input_buffer() # clear buffer
-            mode = '' # read mode
-            while len(mode) != 1: # wait for mode to be read
-                mode = tmp.readline().decode().split(',')[0] # read mode
+            tmp = serial.Serial(x.device)
+            tmp.reset_input_buffer()
+            mode = ''
+            while len(mode) != 1:
+                mode = tmp.readline().decode().split(',')[0]
                 print(mode)
             if mode == self.typeof_mc:
                 port = x.device 
-            tmp.close() # close serial port
+            tmp.close()
         
         self.ser = serial.Serial(port)
 
@@ -48,13 +48,13 @@ class Controller():
         if self.typeof_mc != 'P':
             return 'Error'
 
-        if self.ser != None: # if serial port is open
-            pressures = self.ser.readline().decode().strip().split(',') # read pressure data
-        else: # if serial port is not open
-            pressures = ['P','0','0','0','0','0','0','0','0','0','0'] # return 0
+        if self.ser != None:
+            pressures = self.ser.readline().decode().strip().split(',')
+        else:
+            pressures = ['P','0','0','0','0','0','0','0','0','0','0']
             print("Pressure mc not connected")
 
-        return pressures # returns list of pressures
+        return pressures
     
     def change_valve(self, valve):
 
