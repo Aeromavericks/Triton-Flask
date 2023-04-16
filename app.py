@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import serial_controller
 import serial_controllerStub
-import sys, time
+import sys
 from threading import Thread, Lock
 
 app = Flask(__name__) 
@@ -42,7 +42,7 @@ def worker_thread():
     global last_pressure
     while True:
         pressures = pressure_controller.get_p()
-        tmp = {"P1": pressures[1], "P2": pressures[2], "time": time.time()}
+        tmp = {"P1": pressures[1], "P2": pressures[2]}
         #write db part
         print(tmp)
         mutex.acquire()
@@ -60,5 +60,5 @@ if __name__ == '__main__':
     pressure_controller.connect()
     valve_controller.connect()
     t = Thread(target = worker_thread)
-    t.run()
+    t.start()
     app.run(host='0.0.0.0', threaded=True)
