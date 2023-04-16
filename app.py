@@ -43,9 +43,10 @@ def worker_thread():
     while True:
         pressures = pressure_controller.get_p()
         tmp = {"P1": pressures[1], "P2": pressures[2]}
-        
         #write db part
-        print(tmp)
+        url_string = 'http://localhost:8086/write?db=lre'
+        data_string = 'data p1='+str(pressures[0])+',p2='+str(pressures[1])
+        print(data_string)
         mutex.acquire()
         last_pressure = tmp
         mutex.release()
