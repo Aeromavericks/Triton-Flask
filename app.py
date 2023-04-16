@@ -32,9 +32,9 @@ def valve_toggle(valvename):
     valve_controller.change_valve(valvename)
     mutex.acquire()
     if valve_states[valvename] == 0:
-        valve_states[valve_name] = 1
+        valve_states[valvename] = 1
     else :
-        valve_states[valve_name] = 0
+        valve_states[valvename] = 0
     print(valve_states)
     mutex.release()
     return {valvename:'changed'}
