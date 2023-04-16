@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import serial_controller
 import serial_controllerStub
-import sys
+import sys, time, requests
 from threading import Thread, Lock
 
 app = Flask(__name__) 
@@ -43,6 +43,7 @@ def worker_thread():
     while True:
         pressures = pressure_controller.get_p()
         tmp = {"P1": pressures[1], "P2": pressures[2]}
+        
         #write db part
         print(tmp)
         mutex.acquire()
