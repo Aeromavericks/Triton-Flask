@@ -57,7 +57,8 @@ def worker_thread():
         mutex.acquire()
         data_string = 'data p1='+str(pressures[1])+',p2='+str(pressures[2])+',valve1='+str(valve_states['valve1'])+',valve2='+str(valve_states['valve2'])+',valve3='+str(valve_states['valve3'])+',valve4='+str(valve_states['valve4'])+'valve5='+str(valve_states['valve5'])+',valve6='+str(valve_states['valve6'])
         mutex.release()
-        r = requests.post(url_string, data=data_string)        
+        r = requests.post(url_string, data=data_string)
+        print('added to db')        
         mutex.acquire()
         last_pressure = tmp
         mutex.release()
