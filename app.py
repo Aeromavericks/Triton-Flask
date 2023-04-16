@@ -9,7 +9,7 @@ app = Flask(__name__)
 pressure_controller = None
 valve_controller = None
 last_pressure = {"P1": 0, "P2": 0}
-valve_states = {'valve1':0, 'valve2': 0, 'valve3': 0, 'valve4':0, 'valve5':0, 'valve6':0}
+valve_states = {'valve1':0, 'valve2': 0, 'valve3': 0, 'valve4':0, 'valve5':0}
 mutex = Lock()
 
 def initializeSerialControllers() -> None:
@@ -55,7 +55,7 @@ def worker_thread():
         #write db part
         url_string = 'http://localhost:8086/write?db=lre'
         mutex.acquire()
-        data_string = 'data p1='+str(pressures[1])+',p2='+str(pressures[2])+',valve1='+str(valve_states['valve1'])+',valve2='+str(valve_states['valve2'])+',valve3='+str(valve_states['valve3'])+',valve4='+str(valve_states['valve4'])+',valve5='+str(valve_states['valve5'])+',valve6='+str(valve_states['valve6'])
+        data_string = 'data p1='+str(pressures[1])+',p2='+str(pressures[2])+',valve1='+str(valve_states['valve1'])+',valve2='+str(valve_states['valve2'])+',valve3='+str(valve_states['valve3'])+',valve4='+str(valve_states['valve4'])+',valve5='+str(valve_states['valve5'])
         print(data_string)
         mutex.release()
         r = requests.post(url_string, data=data_string)
