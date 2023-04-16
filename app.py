@@ -54,7 +54,7 @@ def worker_thread():
         tmp = {"P1": pressures[1], "P2": pressures[2]}
         #write db part
         url_string = 'http://localhost:8086/write?db=lre'
-        data_string = 'data p1='+str(pressures[1])+',p2='+str(pressures[2])+',valve=0'
+        data_string = 'data p1='+str(pressures[1])+',p2='+str(pressures[2])+',valve1=0,valve2=0,valve3=0,valve4=0,valve5=0,valve6=0'
         r = requests.post(url_string, data=data_string)        
         mutex.acquire()
         last_pressure = tmp
