@@ -9,7 +9,7 @@ app = Flask(__name__)
 pressure_controller = None
 valve_controller = None
 last_pressure = {"P1": 0, "P2": 0}
-valve_states = {}
+valve_states = {'valve1':0, 'valve2': 0, 'valve3': 0, 'valve4':0, 'valve5':0, 'valve6':0}
 mutex = Lock()
 
 def initializeSerialControllers() -> None:
@@ -28,7 +28,15 @@ def index():
 
 @app.route('/valve_toggle/<valvename>')
 def valve_toggle(valvename):
+    global valve_states
     valve_controller.change_valve(valvename)
+    mutex.acquire()
+    if valve_states[valvename] == 0:
+        valve_states[valve_name] = 1
+    else :
+        valve_states[valve_name] = 0
+    print(valve_states)
+    mutex.release()
     return {valvename:'changed'}
 
 @app.route("/pressure_data")
@@ -47,7 +55,7 @@ def worker_thread():
         #write db part
         url_string = 'http://localhost:8086/write?db=lre'
         data_string = 'data p1='+str(pressures[1])+',p2='+str(pressures[2])+',valve=0'
-        #r = requests.post(url_string, data=data_string)        
+        r = requests.post(url_string, data=data_string)        
         mutex.acquire()
         last_pressure = tmp
         mutex.release()
