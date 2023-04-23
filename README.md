@@ -19,6 +19,10 @@ Running in production mode
 python3 app.py
 ```
 
+Install grafana button plugin
+https://grafana.com/grafana/plugins/cloudspout-button-panel/?tab=installation
+Reboot pi
+
 # Documentation
 
 ## [Manual in Notion](https://www.notion.so/AeroMavs-Triton-Flask-73c10addb0214e17bf424c82b9e43e5e?pvs=4)
