@@ -4,11 +4,11 @@ import serial_controllerStub
 import sys, time, requests
 from threading import Thread, Lock
 
-app = Flask(__name__) 
+app = Flask(__name__)
 
 pressure_controller = None
 valve_controller = None
-last_pressure = {"P1": 0, "P2": 0}
+
 valve_states = {'valve1':0, 'valve2': 0, 'valve3': 0, 'valve4':0, 'valve5':0}
 mutex = Lock()
 
@@ -41,26 +41,23 @@ def valve_toggle(valvename):
 
 @app.route("/pressure_data")
 def pressure_data():
-    global last_pressure
-    mutex.acquire()
-    tmp = last_pressure
-    mutex.release()
-    return tmp
+    query_string = f'SELECT "p1"::field FROM "data" ORDER BY "time" DESC LIMIT 1'
+    payload = {'q':query_String, 'db':'lre'} 
+    url = 'http://localhost:8086/query'
+    r = requests.get(url=url, params=payload)
+    p1 = r.json()['results'][0]['series'][0]['values'][1]
+    p2 = r.json()['results'][0]['series'][0]['values'][2]
+    return {'P1': p1, 'P2': p2}
 
 def worker_thread():
-    global last_pressure
     while True:
-        pressures = pressure_controller.get_p()
-        tmp = {"P1": pressures[1], "P2": pressures[2]}
+        pressure_reading = pressure_controller.get_p()
         #write db part
         url_string = 'http://localhost:8086/write?db=lre'
         mutex.acquire()
-        data_string = 'data p1='+str(pressures[1])+',p2='+str(pressures[2])+',valve1='+str(valve_states['valve1'])+',valve2='+str(valve_states['valve2'])+',valve3='+str(valve_states['valve3'])+',valve4='+str(valve_states['valve4'])+',valve5='+str(valve_states['valve5'])
+        data_string = 'data p1='+str(pressure_reading.get_pressure_sensor1())+',p2='+str(pressure_reading.get_pressure_sensor2())+',valve1='+str(valve_states['valve1'])+',valve2='+str(valve_states['valve2'])+',valve3='+str(valve_states['valve3'])+',valve4='+str(valve_states['valve4'])+',valve5='+str(valve_states['valve5'])
         mutex.release()
         r = requests.post(url_string, data=data_string)
-        mutex.acquire()
-        last_pressure = tmp
-        mutex.release()
         time.sleep(0.5)
 
 if __name__ == '__main__':
