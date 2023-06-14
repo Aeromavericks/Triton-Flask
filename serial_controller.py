@@ -1,7 +1,7 @@
 import serial
 import serial.tools.list_ports 
 import time
-
+import PressureReading
 
 class Controller():
     def __init__(self, typeof_mc): 
@@ -48,12 +48,17 @@ class Controller():
             return 'Error'
 
         if self.ser != None:
-            pressures = self.ser.readline().decode().strip().split(',')
+            pressure_reading = decode_pressure_reading(self.ser.readline())
         else:
-            pressures = ['P','0','0','0','0','0','0','0','0','0','0']
+            pressure_reading = PressureReading.PressureReading([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
             print("Pressure mc not connected")
 
-        return pressures
+        return pressure_reading
+
+    def decode_pressure_reading(self, reading):
+        sanitized_reading = reading.decode().strip().split(',')
+        return PressureReading.PressureReading(sanitized_reading)
+
     
     def change_valve(self, valve):
 
